@@ -9,13 +9,16 @@ public class GameManager : MonoBehaviour {
     public GameObject manaBar;
     public GameObject drawArea;
     public GameObject castButton;
+    public GameObject spellsToCastBar;   
 
     private Player player;
     private Enemy enemy;
     private List<Spell> spellsToCast = new List<Spell>();
     private Spell spellToCast;
     private int spellsToCastIndex = 0;
+    private int spellsToCastBarIndex = 0;
     private bool castPhase = false;
+    private bool preparePhase = true;
 
     // Use this for initialization
     void Start()
@@ -40,7 +43,11 @@ public class GameManager : MonoBehaviour {
         {
             spellToCast = spellsToCast[spellsToCastIndex];
         }
-        else
+        else if (preparePhase)
+        {
+
+        }
+        else 
         {
 
         }
@@ -56,13 +63,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void EndCastPhase()
+    public void StartPreparePhase()
+    {
+        preparePhase = true;
+        castButton.SetActive(true);
+    }
+
+    private void StartEnemyPhase()
     {
         castPhase = false;
         drawArea.SetActive(false);
         spellsToCast.Clear();
         spellsToCastIndex = 0;
-        castButton.SetActive(true);
     }
 
     public string GetSpellToCastGestureId()
@@ -75,7 +87,7 @@ public class GameManager : MonoBehaviour {
         spellsToCastIndex++;
         if (spellsToCastIndex >= spellsToCast.Count)
         {
-            EndCastPhase();
+            StartEnemyPhase();
         }
     }
 
@@ -87,5 +99,8 @@ public class GameManager : MonoBehaviour {
     public void AddSpellToCast(Spell spell)
     {
         spellsToCast.Add(spell);
+        Transform spellToCastBarSlot = spellsToCastBar.transform.GetChild(spellsToCastBarIndex);
+        Instantiate(spell, spellsToCastBar.transform.GetChild(spellsToCastBarIndex));
+        spellsToCastBarIndex++;
     }
 }
