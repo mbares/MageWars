@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour {
             spellBar.transform.GetChild(i).gameObject.SetActive(true);
             Instantiate(player.spellsPrepared[i], spellBar.transform.GetChild(i));
         }
-        for (int i = 0; i < player.GetComponent<Character>().maxMana; i++)
+        for (int i = 19; i >= player.GetComponent<Character>().maxMana; i--)
         {
-            manaBar.transform.GetChild(i).gameObject.SetActive(true);
+            manaBar.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 
@@ -98,9 +98,49 @@ public class GameManager : MonoBehaviour {
 
     public void AddSpellToCast(Spell spell)
     {
-        spellsToCast.Add(spell);
-        Transform spellToCastBarSlot = spellsToCastBar.transform.GetChild(spellsToCastBarIndex);
-        Instantiate(spell, spellsToCastBar.transform.GetChild(spellsToCastBarIndex));
-        spellsToCastBarIndex++;
+        if (spell.manaCost <= player.GetComponent<Character>().mana)
+        {
+            spellsToCast.Add(spell);
+            GameObject spellToCastBarSlot = spellsToCastBar.transform.GetChild(spellsToCastBarIndex).gameObject;
+            spellToCastBarSlot.SetActive(true);
+            spellToCastBarSlot.GetComponent<PreparedSpell>().spell = spell;
+            spellToCastBarSlot.GetComponent<Image>().sprite = spell.gameObject.GetComponent<Image>().sprite;
+            spellsToCastBarIndex++;
+            player.GetComponent<Character>().mana -= spell.manaCost;
+            for (int i = player.GetComponent<Character>().maxMana; i >= player.GetComponent<Character>().mana; i--)
+            {
+                Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
+                tmp.a = 0.5f;
+                manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = tmp;
+            }
+        }
+    }
+
+    public void RemoveSpellToCast(Spell spell)
+    {
+        int index = spellsToCast.LastIndexOf(spell);
+        spellsToCast.Remove(spell);
+        GameObject spellToCastBarSlot = spellsToCastBar.transform.GetChild(index).gameObject;
+        for (int i = index; i < spellsToCastBarIndex; i++)
+        {
+            if (spellsToCastBar.transform.GetChild(i + 1).gameObject.activeInHierarchy)
+            {
+                spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<PreparedSpell>().spell = spellsToCastBar.transform.GetChild(i + 1).gameObject.GetComponent<PreparedSpell>().spell;
+                spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = spellsToCastBar.transform.GetChild(i + 1).gameObject.GetComponent<Image>().sprite;
+            }
+            else
+            {
+                spellsToCastBar.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            
+        }
+        spellsToCastBarIndex--;
+        player.GetComponent<Character>().mana += spell.manaCost;
+        for (int i = 0; i < player.GetComponent<Character>().mana; i++)
+        {
+            Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
+            tmp.a = 1f;
+            manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = tmp;
+        }
     }
 }

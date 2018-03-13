@@ -19,9 +19,8 @@ public class Spell : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    public void Cast()
+    public void AddSpellToCast()
     {
         gameManager.AddSpellToCast(this);
     }
-
 }

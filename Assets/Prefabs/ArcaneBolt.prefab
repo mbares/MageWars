@@ -87,7 +87,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114494553465713530}
-        m_MethodName: Cast
+        m_MethodName: AddSpellToCast
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
