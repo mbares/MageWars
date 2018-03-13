@@ -8,4 +8,19 @@ public class Character : MonoBehaviour {
     public int mana;
     public int maxHealth;
     public int maxMana;
+
+    public void ReduceHealth(int damage)
+    {
+        health -= damage;
+    }
+
+    public void IncreaseHealth(int healValue)
+    {
+        health += healValue;
+    }
+
+    public void RefillFullMana()
+    {
+        mana = maxMana;
+    }
 }

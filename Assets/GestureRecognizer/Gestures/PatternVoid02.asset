@@ -9,15 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ce0fdb4e39b5744abf0c061bd2a3e30, type: 3}
-  m_Name: PatternHorizontal
+  m_Name: PatternVoid02
   m_EditorClassIdentifier: 
-  id: horizontal
+  id: void
   points: []
   gesture:
     lines:
     - points:
-      - {x: 0, y: 0.5}
-      - {x: 1, y: 0.5}
-      closedLine: 0
+      - {x: 0.039800994, y: 0.7711443}
+      - {x: 0.47761193, y: 0.22885573}
+      - {x: 0.9701493, y: 0.76119405}
+      - {x: 0.05970149, y: 0.7711443}
+      closedLine: 1
   useLinesOrder: 0
   useLinesDirections: 0

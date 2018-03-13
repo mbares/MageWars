@@ -9,16 +9,17 @@ public class GameManager : MonoBehaviour {
     public GameObject manaBar;
     public GameObject drawArea;
     public GameObject castButton;
-    public GameObject spellsToCastBar;   
+    public GameObject spellsToCastBar;
 
-    private Player player;
     private Enemy enemy;
+    private Player player;
     private List<Spell> spellsToCast = new List<Spell>();
     private Spell spellToCast;
     private int spellsToCastIndex = 0;
     private int spellsToCastBarIndex = 0;
-    private bool castPhase = false;
-    private bool preparePhase = true;
+    private bool isPreparePhase = true;
+    private bool isCastingPhase = false;
+    private bool isEnemyPhase = false;
 
     // Use this for initialization
     void Start()
@@ -39,17 +40,9 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
-        if (castPhase)
+        if (isCastingPhase)
         {
             spellToCast = spellsToCast[spellsToCastIndex];
-        }
-        else if (preparePhase)
-        {
-
-        }
-        else 
-        {
-
         }
     }
 
@@ -57,21 +50,30 @@ public class GameManager : MonoBehaviour {
     {
         if (spellsToCast.Count > 0)
         {
-            castPhase = true;
+            isCastingPhase = true;
             drawArea.SetActive(true);
             castButton.SetActive(false);
+            spellsToCastBar.SetActive(false);
         }
     }
 
     public void StartPreparePhase()
     {
-        preparePhase = true;
+        isPreparePhase = true;
         castButton.SetActive(true);
+        spellsToCastBar.SetActive(true);
+        player.GetComponent<Character>().RefillFullMana();
+        RefillMana();
+        ClearSpellsToCastBar();
     }
 
     private void StartEnemyPhase()
     {
-        castPhase = false;
+        enemy.SetIsFinishedAttacking(false);
+        spellsToCastBarIndex = 0;
+        ClearSpellsToCastBar();
+        isEnemyPhase = true;
+        isCastingPhase = false;
         drawArea.SetActive(false);
         spellsToCast.Clear();
         spellsToCastIndex = 0;
@@ -89,11 +91,6 @@ public class GameManager : MonoBehaviour {
         {
             StartEnemyPhase();
         }
-    }
-
-    public bool IsCastPhase()
-    {
-        return castPhase;
     }
 
     public void AddSpellToCast(Spell spell)
@@ -130,17 +127,45 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
+                spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<PreparedSpell>().spell = null;
+                spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = null;
                 spellsToCastBar.transform.GetChild(i).gameObject.SetActive(false);
             }
             
         }
         spellsToCastBarIndex--;
         player.GetComponent<Character>().mana += spell.manaCost;
+        RefillMana();
+    }
+
+    private void RefillMana()
+    {
         for (int i = 0; i < player.GetComponent<Character>().mana; i++)
         {
             Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
             tmp.a = 1f;
             manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = tmp;
         }
+    }
+
+    private void ClearSpellsToCastBar()
+    {
+        for (int i = 0; i < spellsToCastBar.transform.childCount; i++)
+        {
+            spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<PreparedSpell>().spell = null;
+            spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = null;
+            spellsToCastBar.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
+    public bool IsEnemyPhase()
+    {
+        return isEnemyPhase;
+    }
+
+
+    public bool IsCastingPhase()
+    {
+        return isCastingPhase;
     }
 }
