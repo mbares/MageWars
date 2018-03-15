@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-    public int health;
-    public int mana;
     public int maxHealth;
     public int maxMana;
 
-    public void ReduceHealth(int damage)
-    {
-        health -= damage;
-    }
+    private int health;
+    private int mana;
+    private bool isBurning = false;
+    private bool isStunned = false;
+    private bool isConfused = false;
 
-    public void IncreaseHealth(int healValue)
+    private void Start()
     {
-        health += healValue;
-    }
-
-    public void RefillFullMana()
-    {
+        health = maxHealth;
         mana = maxMana;
+    }
+
+    public void SetHealth(int health)
+    {
+        this.health = health;
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void SetMana(int mana)
+    {
+        this.mana = mana;
+    }
+
+    public int GetMana()
+    {
+        return mana;
     }
 }

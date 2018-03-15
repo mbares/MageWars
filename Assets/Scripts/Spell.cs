@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class Spell : MonoBehaviour {
 
+    public enum SpellSchool
+    {
+        Arcane, Fire, Water, Air, Earth, Illusion, Shadow
+    }
+
     public string gestureId;
     public int manaCost;
-    public int damage;
-    public int damageLevelModifier;
     public string name;
     public string description;
+    public int damage;
+    public int gestureDamageModifier;
+    public SpellSchool spellSchool;
 
     private GameManager gameManager;
 

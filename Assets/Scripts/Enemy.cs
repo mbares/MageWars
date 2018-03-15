@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour {
     public void Attack(int minDmg, int maxDmg, int extraDamage = 0)
     {
         int damage = Random.Range(minDmg, maxDmg) + extraDamage;
-        target.ReduceHealth(damage);
+        target.SetHealth(target.GetHealth() - damage);
     }
 
     public bool IsFinishedAttacking()

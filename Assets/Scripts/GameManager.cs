@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameObject drawArea;
     public GameObject castButton;
     public GameObject spellsToCastBar;
+    public GameObject gesturePreview;
 
     private Enemy enemy;
     private Player player;
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour {
     private bool isCastingPhase = false;
     private bool isEnemyPhase = false;
 
-    // Use this for initialization
     void Start()
     {
         drawArea.SetActive(false);
@@ -46,6 +46,27 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public bool IsEnemyPhase()
+    {
+        return isEnemyPhase;
+    }
+
+
+    public bool IsCastingPhase()
+    {
+        return isCastingPhase;
+    }
+
+    public void StartPreparePhase()
+    {
+        isPreparePhase = true;
+        castButton.SetActive(true);
+        spellsToCastBar.SetActive(true);
+        player.GetComponent<Character>().SetMana(player.GetComponent<Character>().maxMana);
+        RefillMana();
+        ClearSpellsToCastBar();
+    }
+
     public void StartCastPhase()
     {
         if (spellsToCast.Count > 0)
@@ -54,17 +75,8 @@ public class GameManager : MonoBehaviour {
             drawArea.SetActive(true);
             castButton.SetActive(false);
             spellsToCastBar.SetActive(false);
+            gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].gestureId);
         }
-    }
-
-    public void StartPreparePhase()
-    {
-        isPreparePhase = true;
-        castButton.SetActive(true);
-        spellsToCastBar.SetActive(true);
-        player.GetComponent<Character>().RefillFullMana();
-        RefillMana();
-        ClearSpellsToCastBar();
     }
 
     private void StartEnemyPhase()
@@ -90,12 +102,14 @@ public class GameManager : MonoBehaviour {
         if (spellsToCastIndex >= spellsToCast.Count)
         {
             StartEnemyPhase();
+            return;
         }
+        gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].gestureId);
     }
 
     public void AddSpellToCast(Spell spell)
     {
-        if (spell.manaCost <= player.GetComponent<Character>().mana)
+        if (spell.manaCost <= player.GetComponent<Character>().GetMana())
         {
             spellsToCast.Add(spell);
             GameObject spellToCastBarSlot = spellsToCastBar.transform.GetChild(spellsToCastBarIndex).gameObject;
@@ -103,8 +117,8 @@ public class GameManager : MonoBehaviour {
             spellToCastBarSlot.GetComponent<PreparedSpell>().spell = spell;
             spellToCastBarSlot.GetComponent<Image>().sprite = spell.gameObject.GetComponent<Image>().sprite;
             spellsToCastBarIndex++;
-            player.GetComponent<Character>().mana -= spell.manaCost;
-            for (int i = player.GetComponent<Character>().maxMana; i >= player.GetComponent<Character>().mana; i--)
+            player.GetComponent<Character>().SetMana(player.GetComponent<Character>().GetMana() - spell.manaCost);
+            for (int i = player.GetComponent<Character>().maxMana; i >= player.GetComponent<Character>().GetMana(); i--)
             {
                 Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
                 tmp.a = 0.5f;
@@ -134,13 +148,13 @@ public class GameManager : MonoBehaviour {
             
         }
         spellsToCastBarIndex--;
-        player.GetComponent<Character>().mana += spell.manaCost;
+        player.GetComponent<Character>().SetMana(player.GetComponent<Character>().GetMana() + spell.manaCost);
         RefillMana();
     }
 
     private void RefillMana()
     {
-        for (int i = 0; i < player.GetComponent<Character>().mana; i++)
+        for (int i = 0; i < player.GetComponent<Character>().GetMana(); i++)
         {
             Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
             tmp.a = 1f;
@@ -156,16 +170,5 @@ public class GameManager : MonoBehaviour {
             spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = null;
             spellsToCastBar.transform.GetChild(i).gameObject.SetActive(false);
         }
-    }
-
-    public bool IsEnemyPhase()
-    {
-        return isEnemyPhase;
-    }
-
-
-    public bool IsCastingPhase()
-    {
-        return isCastingPhase;
     }
 }

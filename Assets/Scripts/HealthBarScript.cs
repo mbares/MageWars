@@ -11,10 +11,10 @@ public class HealthBarScript : MonoBehaviour {
 
     void Update () 
     {
-        statusText.text = character.health.ToString();
-        fillAmount = (float)character.health / character.maxHealth;
+        statusText.text = character.GetHealth().ToString();
+        fillAmount = (float)character.GetHealth() / character.maxHealth;
         content.fillAmount = fillAmount;
-        if (character.health <= 0)
+        if (character.GetHealth() <= 0)
         {
             statusText.text = "DEAD";
         }
