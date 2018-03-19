@@ -4,7 +4,8 @@ using UnityEngine;
 using GestureRecognizer;
 using UnityEngine.UI;
 
-public class GestureHandler : MonoBehaviour {
+public class GestureHandler : MonoBehaviour
+{
 
     public GameManager gameManager;
     public Text gestureScoreText;
@@ -12,13 +13,11 @@ public class GestureHandler : MonoBehaviour {
     public void OnRecognize(RecognitionResult result)
     {
         StopAllCoroutines();
-        if (result != RecognitionResult.Empty && result.gesture.id == gameManager.GetSpellToCastGestureId())
-        {
+        if (result != RecognitionResult.Empty && result.gesture.id == gameManager.GetSpellToCast().GestureId) {
             GestureScore(result.score.score);
+            gameManager.GetSpellToCast().DoSpellEffect(result);
             Debug.Log("Result: " + result.gesture.name + " " + result.score.score * 100 + "%");
-        }
-        else
-        {
+        } else {
             GestureScore(0f);
             Debug.Log("Fail"); ;
         }
@@ -27,20 +26,13 @@ public class GestureHandler : MonoBehaviour {
 
     private void GestureScore(float score)
     {
-        if (score == 1)
-        {
+        if (score > 0.95f) {
             gestureScoreText.text = "Perfect!";
-        }
-        else if (score > 0.9f)
-        {
+        } else if (score > 0.85f) {
             gestureScoreText.text = "Great!";
-        }
-        else if (score > 0.75f)
-        {
+        } else if (score > 0.75f) {
             gestureScoreText.text = "Good!";
-        } 
-        else
-        {
+        } else {
             gestureScoreText.text = "Fail!";
         }
         Invoke("ClearGestureScore", 0.5f);

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce0fdb4e39b5744abf0c061bd2a3e30, type: 3}
+  m_Name: PatternRain03
+  m_EditorClassIdentifier: 
+  id: rain
+  points: []
+  gesture:
+    lines:
+    - points:
+      - {x: 0.03482587, y: 0.38805968}
+      - {x: 0.58208954, y: 0.800995}
+      - {x: 0.45273632, y: 0.31840795}
+      - {x: 0.90547264, y: 0.6069652}
+      - {x: 0.6368159, y: 0.014925361}
+      closedLine: 0
+  useLinesOrder: 0
+  useLinesDirections: 0

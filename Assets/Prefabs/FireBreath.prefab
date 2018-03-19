@@ -9,33 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1713386866395252}
+  m_RootGameObject: {fileID: 1970041652990298}
   m_IsPrefabParent: 1
---- !u!1 &1713386866395252
+--- !u!1 &1970041652990298
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224255222646932766}
-  - component: {fileID: 222075379548741720}
-  - component: {fileID: 114983558619317674}
-  - component: {fileID: 114568320751477630}
-  - component: {fileID: 114610258244173326}
+  - component: {fileID: 224454716485325278}
+  - component: {fileID: 222106318136850770}
+  - component: {fileID: 114479944739485122}
+  - component: {fileID: 114165046036037692}
+  - component: {fileID: 114514582765545162}
   m_Layer: 5
-  m_Name: ArcaneBolt
+  m_Name: FireBreath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114568320751477630
+--- !u!114 &114165046036037692
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713386866395252}
+  m_GameObject: {fileID: 1970041652990298}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -65,11 +65,11 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114983558619317674}
+  m_TargetGraphic: {fileID: 114479944739485122}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114610258244173326}
+      - m_Target: {fileID: 114514582765545162}
         m_MethodName: AddSpellToCast
         m_Mode: 1
         m_Arguments:
@@ -82,29 +82,12 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114610258244173326
+--- !u!114 &114479944739485122
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713386866395252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6321aa02527d141a8ba8b1490225b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2
-  damageScoreModifier: 1
-  gestureId: arcaneBolt
-  manaCost: 2
-  name: Arcane Bolt
-  description: 
---- !u!114 &114983558619317674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713386866395252}
+  m_GameObject: {fileID: 1970041652990298}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -118,7 +101,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6a79c1054513388469cd48518f268ca3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5ce5298cb59335e4ca026a65981d82ff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -126,18 +109,36 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!222 &222075379548741720
+--- !u!114 &114514582765545162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970041652990298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784b3e245feb7a44aa15ab696f94fb32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  burningDamage: 1
+  gestureId: fireBreath
+  manaCost: 4
+  spellType: 0
+  name: Fire Breath
+  description: 
+--- !u!222 &222106318136850770
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713386866395252}
---- !u!224 &224255222646932766
+  m_GameObject: {fileID: 1970041652990298}
+--- !u!224 &224454716485325278
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713386866395252}
+  m_GameObject: {fileID: 1970041652990298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

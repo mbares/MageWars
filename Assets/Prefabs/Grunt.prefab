@@ -54,8 +54,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8d175d716da42459b0953b5e9e277a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  name: Grunt
 --- !u!114 &114846684181165746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,8 +65,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c453f008c329261468310953dc48ab04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  name: Grunt
+  maxHealth: 10
   maxMana: 0
+  resistances: 
+  weaknesses: 
 --- !u!114 &114980282182204778
 MonoBehaviour:
   m_ObjectHideFlags: 1

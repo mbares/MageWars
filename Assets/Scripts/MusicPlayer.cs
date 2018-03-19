@@ -10,29 +10,23 @@ public class MusicPlayer : MonoBehaviour {
 
     private AudioSource audioSource;
 
-    void Awake()
-    {
+    void Awake() {
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefsManager.GetMasterVolume() ;
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = this;
-        }
-        else if (instance != this)
-        {
+        } else if (instance != this) {
             Destroy(gameObject);
         }
 
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SetVolume(float volume)
-    {
+    public void SetVolume(float volume) {
         audioSource.volume = volume;
     }
 
-    public void SetClip(int clipIndex)
-    {
+    public void SetClip(int clipIndex) {
         audioSource.clip = clips[clipIndex];
         audioSource.Play();
     }

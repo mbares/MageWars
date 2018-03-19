@@ -14,73 +14,66 @@ public class GameManager : MonoBehaviour {
 
     private Enemy enemy;
     private Player player;
-    private List<Spell> spellsToCast = new List<Spell>();
-    private Spell spellToCast;
+    private List<ISpell> spellsToCast = new List<ISpell>();
+    private ISpell spellToCast;
     private int spellsToCastIndex = 0;
     private int spellsToCastBarIndex = 0;
     private bool isPreparePhase = true;
     private bool isCastingPhase = false;
     private bool isEnemyPhase = false;
 
-    void Start()
-    {
+    void Start() {
         drawArea.SetActive(false);
         enemy = FindObjectOfType<Enemy>();
         player = FindObjectOfType<Player>();
-        for (int i = 0; i < player.spellsPrepared.Count; i++)
-        {
+        for (int i = 0; i < player.spellsPrepared.Count; i++) {
             spellBar.transform.GetChild(i).gameObject.SetActive(true);
             Instantiate(player.spellsPrepared[i], spellBar.transform.GetChild(i));
         }
-        for (int i = 19; i >= player.GetComponent<Character>().maxMana; i--)
-        {
+        for (int i = 19; i >= player.GetComponent<Character>().maxMana; i--) {
             manaBar.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 
-    private void Update()
-    {
-        if (isCastingPhase)
-        {
+    private void Update() {
+        if (isCastingPhase) {
             spellToCast = spellsToCast[spellsToCastIndex];
         }
     }
 
-    public bool IsEnemyPhase()
-    {
+    public bool IsEnemyPhase() {
         return isEnemyPhase;
     }
 
 
-    public bool IsCastingPhase()
-    {
+    public bool IsCastingPhase() {
         return isCastingPhase;
     }
 
-    public void StartPreparePhase()
-    {
+    public void StartPreparePhase() {
         isPreparePhase = true;
         castButton.SetActive(true);
         spellsToCastBar.SetActive(true);
         player.GetComponent<Character>().SetMana(player.GetComponent<Character>().maxMana);
         RefillMana();
         ClearSpellsToCastBar();
+        if (!player.GetComponent<Character>().CalculateNewTurnStats()) {
+            Debug.Log(player.GetComponent<Character>().name + " is stunned and is skipping turn");
+            StartEnemyPhase();
+        }
     }
 
-    public void StartCastPhase()
-    {
-        if (spellsToCast.Count > 0)
-        {
+    public void StartCastPhase() {
+        if (spellsToCast.Count > 0) {
             isCastingPhase = true;
             drawArea.SetActive(true);
             castButton.SetActive(false);
             spellsToCastBar.SetActive(false);
-            gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].gestureId);
+            gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].GestureId);
         }
     }
 
-    private void StartEnemyPhase()
-    {
+    private void StartEnemyPhase() {
         enemy.SetIsFinishedAttacking(false);
         spellsToCastBarIndex = 0;
         ClearSpellsToCastBar();
@@ -89,37 +82,35 @@ public class GameManager : MonoBehaviour {
         drawArea.SetActive(false);
         spellsToCast.Clear();
         spellsToCastIndex = 0;
+        if (!enemy.GetComponent<Character>().CalculateNewTurnStats()) {
+            Debug.Log(enemy.GetComponent<Character>().name + " is stunned and is skipping turn");
+            StartPreparePhase();
+        }
     }
 
-    public string GetSpellToCastGestureId()
-    {
-        return spellToCast.gestureId;
+    public ISpell GetSpellToCast() {
+        return spellToCast;
     }
 
-    public void IncrementSpellsToCastIndex()
-    {
+    public void IncrementSpellsToCastIndex() {
         spellsToCastIndex++;
-        if (spellsToCastIndex >= spellsToCast.Count)
-        {
+        if (spellsToCastIndex >= spellsToCast.Count) {
             StartEnemyPhase();
             return;
         }
-        gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].gestureId);
+        gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].GestureId);
     }
 
-    public void AddSpellToCast(Spell spell)
-    {
-        if (spell.manaCost <= player.GetComponent<Character>().GetMana())
-        {
+    public void AddSpellToCast(ISpell spell) {
+        if (spell.ManaCost <= player.GetComponent<Character>().GetMana()) {
             spellsToCast.Add(spell);
             GameObject spellToCastBarSlot = spellsToCastBar.transform.GetChild(spellsToCastBarIndex).gameObject;
             spellToCastBarSlot.SetActive(true);
             spellToCastBarSlot.GetComponent<PreparedSpell>().spell = spell;
-            spellToCastBarSlot.GetComponent<Image>().sprite = spell.gameObject.GetComponent<Image>().sprite;
+            spellToCastBarSlot.GetComponent<Image>().sprite = ((MonoBehaviour)spell).gameObject.GetComponent<Image>().sprite;
             spellsToCastBarIndex++;
-            player.GetComponent<Character>().SetMana(player.GetComponent<Character>().GetMana() - spell.manaCost);
-            for (int i = player.GetComponent<Character>().maxMana; i >= player.GetComponent<Character>().GetMana(); i--)
-            {
+            player.GetComponent<Character>().DecreaseMana(spell.ManaCost);
+            for (int i = player.GetComponent<Character>().maxMana; i >= player.GetComponent<Character>().GetMana(); i--) {
                 Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
                 tmp.a = 0.5f;
                 manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = tmp;
@@ -127,20 +118,15 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void RemoveSpellToCast(Spell spell)
-    {
+    public void RemoveSpellToCast(ISpell spell) {
         int index = spellsToCast.LastIndexOf(spell);
         spellsToCast.Remove(spell);
         GameObject spellToCastBarSlot = spellsToCastBar.transform.GetChild(index).gameObject;
-        for (int i = index; i < spellsToCastBarIndex; i++)
-        {
-            if (spellsToCastBar.transform.GetChild(i + 1).gameObject.activeInHierarchy)
-            {
+        for (int i = index; i < spellsToCastBarIndex; i++) {
+            if (spellsToCastBar.transform.GetChild(i + 1).gameObject.activeInHierarchy) {
                 spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<PreparedSpell>().spell = spellsToCastBar.transform.GetChild(i + 1).gameObject.GetComponent<PreparedSpell>().spell;
                 spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = spellsToCastBar.transform.GetChild(i + 1).gameObject.GetComponent<Image>().sprite;
-            }
-            else
-            {
+            } else {
                 spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<PreparedSpell>().spell = null;
                 spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = null;
                 spellsToCastBar.transform.GetChild(i).gameObject.SetActive(false);
@@ -148,24 +134,21 @@ public class GameManager : MonoBehaviour {
             
         }
         spellsToCastBarIndex--;
-        player.GetComponent<Character>().SetMana(player.GetComponent<Character>().GetMana() + spell.manaCost);
+        player.GetComponent<Character>().IncreaseMana(spell.ManaCost);
         RefillMana();
     }
 
     private void RefillMana()
     {
-        for (int i = 0; i < player.GetComponent<Character>().GetMana(); i++)
-        {
+        for (int i = 0; i < player.GetComponent<Character>().GetMana(); i++) {
             Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;
             tmp.a = 1f;
             manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = tmp;
         }
     }
 
-    private void ClearSpellsToCastBar()
-    {
-        for (int i = 0; i < spellsToCastBar.transform.childCount; i++)
-        {
+    private void ClearSpellsToCastBar() {
+        for (int i = 0; i < spellsToCastBar.transform.childCount; i++) {
             spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<PreparedSpell>().spell = null;
             spellsToCastBar.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = null;
             spellsToCastBar.transform.GetChild(i).gameObject.SetActive(false);

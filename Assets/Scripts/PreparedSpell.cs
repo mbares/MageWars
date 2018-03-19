@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class PreparedSpell : MonoBehaviour {
 
-    public Spell spell;
+    public ISpell spell;
 
     private GameManager gameManager;
 
-    private void Start()
-    {
+    private void Start() {
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    public void RemoveSpellToCast()
-    {
+    public void RemoveSpellToCast() {
         gameManager.RemoveSpellToCast(spell);
     }
 }

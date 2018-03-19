@@ -53,8 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c453f008c329261468310953dc48ab04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Player
   maxHealth: 20
   maxMana: 10
+  resistances: 
+  weaknesses: 
 --- !u!114 &114973282791030708
 MonoBehaviour:
   m_ObjectHideFlags: 1

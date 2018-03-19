@@ -9,29 +9,24 @@ public class OptionsController : MonoBehaviour {
 
     private LevelManager levelManager;
 	private MusicPlayer musicPlayer;
-	// Use this for initialization
-	void Start () 
-	{
+
+    void Start () {
         levelManager = FindObjectOfType<LevelManager>();
 		musicPlayer = FindObjectOfType<MusicPlayer>();
 		volumeSlider.value = PlayerPrefsManager.GetMasterVolume();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         musicPlayer.SetVolume(volumeSlider.value);
         volumeValue.text = (volumeSlider.value * 100).ToString("F2") + "%";
     }
 
-    public void SaveAndExit()
-	{
+    public void SaveAndExit() {
 		PlayerPrefsManager.SetMasterVolume(volumeSlider.value);
 		levelManager.LoadLevel("00a_Start_Menu");
 	}
 	
-	public void SetDefaults()
-	{
+	public void SetDefaults() {
 		volumeSlider.value = 0.8f;
 	}
 }

@@ -4,41 +4,39 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public Character target;
-    public string name;
-
+    private Character target;
+    private Character character;
     private GameManager gameManager;
     private bool isFinishedAttacking = false;
 
-    private void Start()
-    {
+    private void Start() {
         target = FindObjectOfType<Player>().GetComponent<Character>();
         gameManager = FindObjectOfType<GameManager>();
+        character = GetComponent<Character>();
     }
 
-    public void Attack(int minDmg, int maxDmg, int extraDamage = 0)
-    {
-        int damage = Random.Range(minDmg, maxDmg) + extraDamage;
-        target.SetHealth(target.GetHealth() - damage);
+    public void Attack(int minDmg, int maxDmg, int extraDamage = 0) {
+        int damage = Random.Range(minDmg, maxDmg + 1) + extraDamage;
+        if (character.IsBlinded() && Random.Range(0, 4) == 0) {
+            damage = 0;
+            Debug.Log(character.name + " misses the attack because of blind effect.");
+        }
+        target.DecreaseHealth(damage);
     }
 
-    public bool IsFinishedAttacking()
-    {
+    public bool IsFinishedAttacking() {
         return isFinishedAttacking;
     }
 
-    public void SetIsFinishedAttacking(bool isFinishedAttacking)
-    {
+    public void SetIsFinishedAttacking(bool isFinishedAttacking) {
         this.isFinishedAttacking = isFinishedAttacking;
     }
 
-    public void EndTurn()
-    {
+    public void EndTurn() {
         Invoke("EndEnemyTurn", 1.5f);
     }
 
-    private void EndEnemyTurn()
-    {
+    private void EndEnemyTurn() {
         gameManager.StartPreparePhase();
     }
 }
