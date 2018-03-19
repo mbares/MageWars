@@ -22,6 +22,8 @@ public class Character : MonoBehaviour {
     private bool isWet;
     private int wetTurns;
     private bool isStunned;
+    private bool isConfused;
+    private int confusedTurns;
 
     private void Start() {
         health = maxHealth;
@@ -45,7 +47,11 @@ public class Character : MonoBehaviour {
     }
 
     public void IncreaseHealth(int value) {
-        health += value;
+        if ((health + value) > maxHealth) {
+            health = maxHealth;
+        } else {
+            health += value;
+        }
     }
 
     public void DecreaseHealth(int value) {
@@ -133,6 +139,27 @@ public class Character : MonoBehaviour {
             statusEffectsBar.UpdateBar(statusEffects);
         }
         wetTurns = turns;
+    }
+
+    public bool IsConfused() {
+        return isConfused;
+    }
+
+    public void SetIsConfused(int turns) {
+        if (turns > 0 && turns > confusedTurns) {
+            isBurning = true;
+            if (!statusEffects.ContainsKey(StatusEffect.Confused)) {
+                statusEffects.Add(StatusEffect.Confused, turns.ToString());
+            } else {
+                statusEffects[StatusEffect.Confused] = turns.ToString();
+            }
+            statusEffectsBar.UpdateBar(statusEffects);
+        } else if (turns == 0) {
+            isBurning = false;
+            statusEffects.Remove(StatusEffect.Confused);
+            statusEffectsBar.UpdateBar(statusEffects);
+        }
+        confusedTurns = turns;
     }
 
     public bool IsStunned() {

@@ -70,6 +70,7 @@ MonoBehaviour:
   maxMana: 0
   resistances: 
   weaknesses: 
+  statusEffectsBar: {fileID: 0}
 --- !u!114 &114980282182204778
 MonoBehaviour:
   m_ObjectHideFlags: 1

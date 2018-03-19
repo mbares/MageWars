@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum StatusEffect {
-    Blinded, Burning, Wet
+    Blinded, Burning, Wet, Confused
 }
 
 public class StatusEffectsBar : MonoBehaviour {

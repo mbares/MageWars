@@ -18,7 +18,11 @@ public class Enemy : MonoBehaviour {
     public void Attack(int minDmg, int maxDmg, int extraDamage = 0) {
         int damage = Random.Range(minDmg, maxDmg + 1) + extraDamage;
         if (character.IsBlinded() && Random.Range(0, 4) == 0) {
-            damage = 0;
+            Debug.Log(character.name + " misses the attack because of blind effect.");
+            return;
+        }
+        if (character.IsConfused() && Random.Range(0, 5) == 0) {
+            character.DecreaseHealth(damage);
             Debug.Log(character.name + " misses the attack because of blind effect.");
         }
         target.DecreaseHealth(damage);

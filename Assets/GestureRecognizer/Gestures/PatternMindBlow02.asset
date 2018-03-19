@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce0fdb4e39b5744abf0c061bd2a3e30, type: 3}
+  m_Name: PatternMindBlow02
+  m_EditorClassIdentifier: 
+  id: mindBlow
+  points: []
+  gesture:
+    lines:
+    - points:
+      - {x: 0.47263682, y: 0.5970149}
+      - {x: 0.50248754, y: 0.45771146}
+      - {x: 0.60199004, y: 0.4427861}
+      - {x: 0.6467662, y: 0.5970149}
+      - {x: 0.6119403, y: 0.69154227}
+      - {x: 0.4278607, y: 0.721393}
+      - {x: 0.33333334, y: 0.5671642}
+      - {x: 0.37313432, y: 0.41293532}
+      - {x: 0.40298507, y: 0.2935323}
+      - {x: 0.5771144, y: 0.25373137}
+      - {x: 0.76616913, y: 0.33830845}
+      - {x: 0.8208955, y: 0.562189}
+      - {x: 0.7114428, y: 0.7810946}
+      - {x: 0.5771144, y: 0.8905473}
+      - {x: 0.37313432, y: 0.9104478}
+      - {x: 0.23880596, y: 0.82089555}
+      - {x: 0.11940298, y: 0.5174129}
+      - {x: 0.23383084, y: 0.21890545}
+      - {x: 0.2835821, y: 0.15422887}
+      - {x: 0.5273632, y: 0.094527364}
+      closedLine: 0
+  useLinesOrder: 0
+  useLinesDirections: 0
