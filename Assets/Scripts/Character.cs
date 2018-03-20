@@ -204,6 +204,9 @@ public class Character : MonoBehaviour {
     }
 
     public bool CalculateNewTurnStats() {
+        if (elementalShieldTurns > 0) {
+            elementalShieldTurns--;
+        }
         if (blindedTurns > 0) {
             blindedTurns--;
         }
@@ -214,6 +217,10 @@ public class Character : MonoBehaviour {
         }
         if (wetTurns > 0) {
             wetTurns--;
+        }
+        if (elementalShieldTurns == 0) {
+            hasElementalShield = false;
+            statusEffects.Remove(StatusEffect.ElementalShield);
         }
         if (blindedTurns == 0) {
             isBlinded = false;

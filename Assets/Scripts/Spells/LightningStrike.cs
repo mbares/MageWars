@@ -40,11 +40,11 @@ public class LightningStrike : MonoBehaviour, ISpell {
             enemyTarget.SetIsStunned(true);
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");
-        } else if (result.score.score > 0.9f && enemyTarget.IsWet() && Random.Range(0, 3) == 1) {
+        } else if (result.score.score > 0.9f && enemyTarget.IsWet() && Random.Range(0, 5) == 1) {
             enemyTarget.SetIsStunned(true);
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");
-        } else if (enemyTarget.IsWet() && Random.Range(0,5) == 1) {
+        } else if (enemyTarget.IsWet() && Random.Range(0, 10) == 1) {
             enemyTarget.SetIsStunned(true);
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");
