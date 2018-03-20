@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyElementalShield : MonoBehaviour, IEnemySpell {
 
-    public int manaCost;
     public int elementalShieldDuration;
     public int elementalShieldDamage;
     public SpellType spellType;
+
+    private int manaCost;
+    public int ManaCost { get { return manaCost; } set { manaCost = value; } }
 
     public EnemyElementalShield(int manaCost, int elementalShieldDuration, int fireShieldDamage, SpellType spellType) {
         this.manaCost = manaCost;
@@ -18,5 +20,6 @@ public class EnemyElementalShield : MonoBehaviour, IEnemySpell {
 
     public void DoSpellEffect(Enemy enemy, Character target) {
         enemy.GetComponent<Character>().SetHasElementalShield(true, spellType, elementalShieldDuration, elementalShieldDamage);
+        Debug.Log(enemy.GetComponent<Character>().name + " surrounds himself with Elemental Shield");
     }
 }

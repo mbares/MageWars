@@ -7,8 +7,10 @@ public class EnemyFireBreath : MonoBehaviour, IEnemySpell {
     public int minFireBreathDamage;
     public int maxFireBreathDamage;
     public int burningDamage;
-    public int manaCost;
     public SpellType spellType = SpellType.Fire;
+
+    private int manaCost;
+    public int ManaCost { get { return manaCost; } set { manaCost = value; } }
 
     public EnemyFireBreath(int manaCost, int minFireBreathDamage, int maxFireBreathDamage, int burningDamage) {
         this.minFireBreathDamage = minFireBreathDamage;
@@ -19,6 +21,7 @@ public class EnemyFireBreath : MonoBehaviour, IEnemySpell {
     public void DoSpellEffect(Enemy enemy, Character target) {
         enemy.Attack(minFireBreathDamage, maxFireBreathDamage);
         target.SetIsBurning(Random.Range(1, 4), burningDamage);
+        Debug.Log(enemy.GetComponent<Character>().name + " hits " + target.name + " with Fire Breath");
     }
 
 }
