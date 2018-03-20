@@ -1667,6 +1667,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3295,6 +3296,72 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1367013184}
+--- !u!1001 &1448027571
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114060947396806278, guid: 6c079415a83d37a439d5bc0665d72a12,
+        type: 2}
+      propertyPath: weaknesses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114060947396806278, guid: 6c079415a83d37a439d5bc0665d72a12,
+        type: 2}
+      propertyPath: resistances.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 5.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334194118933920, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634652017182878, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+      propertyPath: m_Name
+      value: FireMage
+      objectReference: {fileID: 0}
+    - target: {fileID: 114060947396806278, guid: 6c079415a83d37a439d5bc0665d72a12,
+        type: 2}
+      propertyPath: resistances.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114060947396806278, guid: 6c079415a83d37a439d5bc0665d72a12,
+        type: 2}
+      propertyPath: weaknesses.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6c079415a83d37a439d5bc0665d72a12, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1453501844
 GameObject:
   m_ObjectHideFlags: 0

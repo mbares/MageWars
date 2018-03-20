@@ -24,6 +24,10 @@ public class Character : MonoBehaviour {
     private bool isStunned;
     private bool isConfused;
     private int confusedTurns;
+    private bool hasElementalShield;
+    private SpellType elementalShieldType;
+    private int elementalShieldTurns;
+    private int elementalShieldDamage = 0;
 
     private void Start() {
         health = maxHealth;
@@ -65,6 +69,13 @@ public class Character : MonoBehaviour {
         } else if (weaknesses.Contains(spellType)) {
             value *= 2;
             Debug.Log(name + " is weak to " + spellType + " damage, damage is doubled");
+        }
+        if (HasElementalShield()) {
+            if (GetComponent<Player>() != null) {
+                FindObjectOfType<Enemy>().GetComponent<Character>().DecreaseHealthBySpellDamage(elementalShieldDamage, elementalShieldType);
+            } else if (GetComponent<Enemy>() != null) {
+                FindObjectOfType<Player>().GetComponent<Character>().DecreaseHealthBySpellDamage(elementalShieldDamage, elementalShieldType);
+            }
         }
         health -= value;
     }
@@ -168,6 +179,28 @@ public class Character : MonoBehaviour {
 
     public void SetIsStunned(bool isStunned) {
         this.isStunned = isStunned;
+    }
+
+    public bool HasElementalShield() {
+        return hasElementalShield;
+    }
+
+    public void SetHasElementalShield(bool hasElementalShield, SpellType type, int turns, int damage) {
+        if (turns > 0 && turns > elementalShieldTurns) {
+            hasElementalShield = true;
+            elementalShieldType = type;
+            elementalShieldDamage = damage;
+            if (!statusEffects.ContainsKey(StatusEffect.ElementalShield)) {
+                statusEffects.Add(StatusEffect.ElementalShield, turns.ToString());
+            } else {
+                statusEffects[StatusEffect.ElementalShield] = turns.ToString();
+            }
+            statusEffectsBar.UpdateBar(statusEffects);
+        } else if (turns == 0) {
+            hasElementalShield = false;
+            statusEffects.Remove(StatusEffect.ElementalShield);
+            statusEffectsBar.UpdateBar(statusEffects);
+        }
     }
 
     public bool CalculateNewTurnStats() {
