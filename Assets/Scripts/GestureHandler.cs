@@ -27,13 +27,17 @@ public class GestureHandler : MonoBehaviour
     private void GestureScore(float score)
     {
         if (score > 0.95f) {
+            gestureScoreText.color = Color.green;
             gestureScoreText.text = "Perfect!";
         } else if (score > 0.85f) {
+            gestureScoreText.color = Color.yellow;
             gestureScoreText.text = "Great!";
         } else if (score > 0.75f) {
+            gestureScoreText.color = Color.blue;
             gestureScoreText.text = "Good!";
         } else {
-            gestureScoreText.text = "Fail!";
+            gestureScoreText.color = Color.red;
+            gestureScoreText.text = "Misspell!";
         }
         Invoke("ClearGestureScore", 0.5f);
     }

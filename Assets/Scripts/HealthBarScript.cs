@@ -9,6 +9,11 @@ public class HealthBarScript : MonoBehaviour
     public Text statusText;
 
     private float fillAmount;
+    private GameManager gameManager;
+
+    private void Start() {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     void Update () {
         statusText.text = character.GetHealth().ToString();
@@ -16,6 +21,7 @@ public class HealthBarScript : MonoBehaviour
         content.fillAmount = fillAmount;
         if (character.GetHealth() <= 0) {
             statusText.text = "DEAD";
+            gameManager.HandleCharacterDead(character);
         }
     }
  }

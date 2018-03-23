@@ -4,7 +4,7 @@ using UnityEngine;
 using GestureRecognizer;
 
 public enum SpellType {
-    Arcane, Fire, Water, Earth, Air, Dark, Light
+    None, Arcane, Fire, Water, Earth, Air, Dark, Light
 }
 
 public interface ISpell {

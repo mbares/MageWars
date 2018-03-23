@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114809798020287890}
   m_Layer: 5
   m_Name: Lightning Strike
-  m_TagString: Untagged
+  m_TagString: lightningStrike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,9 +96,10 @@ MonoBehaviour:
   damage: 2
   gestureId: lightning
   manaCost: 3
-  spellType: 4
+  spellType: 5
   name: Lightning Strike
-  description: 
+  description: Strike your opponents with a lightning from above (may cause stunningly
+    terrible effects for the receiver if they are wet).
 --- !u!114 &114830431277818838
 MonoBehaviour:
   m_ObjectHideFlags: 1

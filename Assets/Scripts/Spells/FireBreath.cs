@@ -21,15 +21,18 @@ public class FireBreath : MonoBehaviour, ISpell {
     private string name;
     public string Name { get { return name; } set { name = value; } }
     [SerializeField]
+    [TextArea]
     private string description;
     public string Description { get { return description; } set { description = value; } }
 
     private GameManager gameManager;
     private Character enemyTarget;
+    private Player player;
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
         enemyTarget = FindObjectOfType<Enemy>().GetComponent<Character>();
+        player = FindObjectOfType<Player>();
     }
 
     public void AddSpellToCast() {
@@ -47,7 +50,7 @@ public class FireBreath : MonoBehaviour, ISpell {
         } else {
             enemyTarget.SetIsBurning(1, burningDamage);
         }
-        enemyTarget.DecreaseHealthBySpellDamage(damage, spellType);
+        player.Attack(damage, spellType);
         Debug.Log("Fire breath hits and burns " + enemyTarget.name);
     }
 }

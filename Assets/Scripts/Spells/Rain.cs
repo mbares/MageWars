@@ -18,6 +18,7 @@ public class Rain : MonoBehaviour, ISpell {
     private string name;
     public string Name { get { return name; } set { name = value; } }
     [SerializeField]
+    [TextArea]
     private string description;
     public string Description { get { return description; } set { description = value; } }
 
@@ -25,7 +26,7 @@ public class Rain : MonoBehaviour, ISpell {
     private Character enemyTarget;
 
     private void Start() {
-        gameManager = FindObjectOfType<GameManager>();
+         gameManager = FindObjectOfType<GameManager>();
         enemyTarget = FindObjectOfType<Enemy>().GetComponent<Character>();
     }
 

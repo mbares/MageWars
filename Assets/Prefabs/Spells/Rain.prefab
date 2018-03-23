@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114607758472271916}
   m_Layer: 5
   m_Name: Rain
-  m_TagString: Untagged
+  m_TagString: rain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,9 +122,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gestureId: rain
   manaCost: 2
-  spellType: 2
+  spellType: 3
   name: Rain
-  description: 
+  description: Summon rain even from clear skies and cave ceilings and soak everyone
+    in sight (also nice for extinguishing fires).
 --- !u!222 &222093475678463232
 CanvasRenderer:
   m_ObjectHideFlags: 1

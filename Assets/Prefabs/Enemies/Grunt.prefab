@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Grunt
-  maxHealth: 10
+  maxHealth: 30
   maxMana: 0
   resistances: 
   weaknesses: 

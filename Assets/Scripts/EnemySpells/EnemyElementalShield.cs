@@ -7,12 +7,10 @@ public class EnemyElementalShield : MonoBehaviour, IEnemySpell {
     public int elementalShieldDuration;
     public int elementalShieldDamage;
     public SpellType spellType;
-
-    private int manaCost;
-    public int ManaCost { get { return manaCost; } set { manaCost = value; } }
+    public int ManaCost { get; set; }
 
     public EnemyElementalShield(int manaCost, int elementalShieldDuration, int fireShieldDamage, SpellType spellType) {
-        this.manaCost = manaCost;
+        ManaCost = manaCost;
         this.elementalShieldDuration = elementalShieldDuration;
         this.elementalShieldDamage = fireShieldDamage;
         this.spellType = spellType;

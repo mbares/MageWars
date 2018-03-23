@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114885496186823330}
   m_Layer: 5
   m_Name: Rejuvenating Light
-  m_TagString: Untagged
+  m_TagString: rejuvenatingLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,9 +124,9 @@ MonoBehaviour:
   healScoreModifier: 1
   gestureId: rejuvenatingLight
   manaCost: 3
-  spellType: 6
+  spellType: 7
   name: Rejuvenating Light
-  description: 
+  description: Heal yourself with that bright light (does not cause blindness).
 --- !u!222 &222739312873118412
 CanvasRenderer:
   m_ObjectHideFlags: 1

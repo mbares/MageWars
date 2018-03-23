@@ -15,17 +15,22 @@ public class Enemy : MonoBehaviour {
         character = GetComponent<Character>();
     }
 
-    public void Attack(int minDmg, int maxDmg, int extraDamage = 0) {
-        int damage = Random.Range(minDmg, maxDmg + 1) + extraDamage;
+    public void Attack(int minDmg, int maxDmg, SpellType spellType = SpellType.None, bool lifesteal = false) {
+        int damage = Random.Range(minDmg, maxDmg + 1) + character.GetExtraDamage();
         if (character.IsBlinded() && Random.Range(0, 4) == 0) {
             Debug.Log(character.name + " misses the attack because of blind effect.");
             return;
         }
         if (character.IsConfused() && Random.Range(0, 5) == 0) {
-            character.DecreaseHealth(damage);
-            Debug.Log(character.name + " misses the attack because of blind effect.");
+            character.DecreaseHealthBySpellDamage(damage, spellType);
+            Debug.Log("In it's confusion " + character.name + "'s attack backfires.");
+        } else {
+            target.DecreaseHealthBySpellDamage(damage, spellType);
         }
-        target.DecreaseHealth(damage);
+        if (lifesteal) {
+            character.IncreaseHealth(damage / 2);
+        }
+        character.SetExtraDamage(0);
     }
 
     public bool IsFinishedAttacking() {
@@ -37,6 +42,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void EndTurn() {
+        character.IncreaseMana(character.maxMana);
         Invoke("EndEnemyTurn", 1.5f);
     }
 

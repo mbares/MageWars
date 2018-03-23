@@ -6,6 +6,14 @@ TagManager:
   tags:
   - hbar
   - mana
+  - arcaneBolt
+  - fireBreath
+  - lightningStrike
+  - mindBlow
+  - rain
+  - rejuvenatingLight
+  - void
+  - empower
   layers:
   - Default
   - TransparentFX

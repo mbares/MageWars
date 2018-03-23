@@ -21,15 +21,18 @@ public class ArcaneBolt : MonoBehaviour, ISpell {
     private string name;
     public string Name { get { return name; } set { name = value; } }
     [SerializeField]
+    [TextArea]
     private string description;
     public string Description { get { return description; } set { description = value; } }
 
     private GameManager gameManager;
     private Character enemyTarget;
+    private Player player;
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
         enemyTarget = FindObjectOfType<Enemy>().GetComponent<Character>();
+        player = FindObjectOfType<Player>();
     }
 
     public void AddSpellToCast() {
@@ -43,8 +46,7 @@ public class ArcaneBolt : MonoBehaviour, ISpell {
         } else if (result.score.score > 0.85f) {
             damageValue += damageScoreModifier;
         }
-        enemyTarget.DecreaseHealthBySpellDamage(damageValue, spellType);
+        player.Attack(damageValue, spellType);
         Debug.Log("Arcane Bolt hits.");
     }
-
 }

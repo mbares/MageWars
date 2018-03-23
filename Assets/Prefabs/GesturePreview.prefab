@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1286402744680194}
+  m_IsPrefabParent: 1
+--- !u!1 &1286402744680194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224222024035151802}
+  - component: {fileID: 222166889173666228}
+  - component: {fileID: 114574320056801634}
+  - component: {fileID: 114532280974724402}
+  m_Layer: 5
+  m_Name: GesturePreview
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &114532280974724402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286402744680194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaad26884225fbb45b6fb27ddd993480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestureShowTime: 0.5
+  gesturePreviews:
+  - gestureId: arcaneBolt
+    image: {fileID: 21300000, guid: c93808e7912e8c14695b45048c21b6df, type: 3}
+  - gestureId: void
+    image: {fileID: 21300000, guid: 72b86d3442b121b4cb7947dc64d8e08c, type: 3}
+  - gestureId: rain
+    image: {fileID: 21300000, guid: b9857cebc9923e746a314927d0968e13, type: 3}
+  - gestureId: lightning
+    image: {fileID: 21300000, guid: 495fdb9217fb3cf48a09c506833c4377, type: 3}
+  - gestureId: fireBreath
+    image: {fileID: 21300000, guid: 929f97b4c132b9c4b90be8c7cd56f2ec, type: 3}
+  - gestureId: mindBlow
+    image: {fileID: 21300000, guid: 71da3dc549277ef4dbb6e739f4d9493c, type: 3}
+  - gestureId: rejuvenatingLight
+    image: {fileID: 21300000, guid: 8c97512e76b0e1842b1a4d70ee95fa25, type: 3}
+  - gestureId: empower
+    image: {fileID: 21300000, guid: 68d91dd0e145df44bb9704c4c1a6b27c, type: 3}
+--- !u!114 &114574320056801634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286402744680194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &222166889173666228
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286402744680194}
+--- !u!224 &224222024035151802
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286402744680194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000030518, y: -0.0000019073}
+  m_SizeDelta: {x: 443.94, y: 325.3}
+  m_Pivot: {x: 0.5, y: 0.5}

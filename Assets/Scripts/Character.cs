@@ -28,8 +28,14 @@ public class Character : MonoBehaviour {
     private SpellType elementalShieldType;
     private int elementalShieldTurns;
     private int elementalShieldDamage = 0;
+    private int extraDamage = 0;
+    private List<SpellType> temporaryResistances = new List<SpellType>();
 
     private void Start() {
+        if (gameObject.GetComponent<Player>() != null) {
+            maxHealth = PlayerPrefsManager.GetPlayerMaxHealth();
+            maxMana = PlayerPrefsManager.GetPlayerMaxMana();
+        } 
         health = maxHealth;
         mana = maxMana;
     }
@@ -63,7 +69,7 @@ public class Character : MonoBehaviour {
     }
 
     public void DecreaseHealthBySpellDamage(int value, SpellType spellType) {
-        if (resistances.Contains(spellType)) {
+        if (resistances.Contains(spellType) || temporaryResistances.Contains(spellType)) {
             value /= 2;
             Debug.Log(name + " is resistant to " + spellType + " damage, damage is halved");
         } else if (weaknesses.Contains(spellType)) {
@@ -188,6 +194,9 @@ public class Character : MonoBehaviour {
     public void SetHasElementalShield(bool hasElementalShield, SpellType type, int turns, int damage) {
         if (turns > 0 && turns > elementalShieldTurns) {
             hasElementalShield = true;
+            if (!resistances.Contains(type)) {
+                temporaryResistances.Add(type);
+            }
             elementalShieldType = type;
             elementalShieldDamage = damage;
             if (!statusEffects.ContainsKey(StatusEffect.ElementalShield)) {
@@ -197,8 +206,26 @@ public class Character : MonoBehaviour {
             }
             statusEffectsBar.UpdateBar(statusEffects);
         } else if (turns == 0) {
+            temporaryResistances.Remove(type);
             hasElementalShield = false;
             statusEffects.Remove(StatusEffect.ElementalShield);
+            statusEffectsBar.UpdateBar(statusEffects);
+        }
+    }
+
+    public int GetExtraDamage() {
+        return extraDamage;
+    }
+
+    public void SetExtraDamage(int extraDamage) {
+        this.extraDamage = extraDamage;
+        if (extraDamage > 0) {
+            if (!statusEffects.ContainsKey(StatusEffect.ExtraDamage)) {
+                statusEffects.Add(StatusEffect.ExtraDamage, "");
+                statusEffectsBar.UpdateBar(statusEffects);
+            } 
+        } else {
+            statusEffects.Remove(StatusEffect.ExtraDamage);
             statusEffectsBar.UpdateBar(statusEffects);
         }
     }

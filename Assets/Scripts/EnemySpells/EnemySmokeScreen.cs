@@ -5,12 +5,10 @@ using UnityEngine;
 public class EnemySmokeScreen : MonoBehaviour, IEnemySpell {
 
     public int smokeScreenDuration;
-
-    private int manaCost;
-    public int ManaCost { get { return manaCost; } set { manaCost = value; } }
+    public int ManaCost { get; set; }
 
     public EnemySmokeScreen(int manaCost, int smokeScreenDuration) {
-        this.manaCost = manaCost;
+        ManaCost = manaCost;
         this.smokeScreenDuration = smokeScreenDuration;
     }
 

@@ -314,6 +314,8 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 0ed70c76cb8ed854c9cb3e3f7a5604e9, type: 3}
   - statusEffect: 4
     icon: {fileID: 21300000, guid: d39a4a52ec3ccfb45a5f11c26ea3b9e6, type: 3}
+  - statusEffect: 5
+    icon: {fileID: 21300000, guid: 52c139d166eb4ca47b58349814488ac6, type: 3}
 --- !u!114 &114140143237245288
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public GameObject spellsToCastBar;
     public GameObject gesturePreview;
 
+    private LevelManager levelManager;
     private Enemy enemy;
     private Player player;
     private List<ISpell> spellsToCast = new List<ISpell>();
@@ -24,11 +25,12 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         drawArea.SetActive(false);
+        levelManager = FindObjectOfType<LevelManager>();
         enemy = FindObjectOfType<Enemy>();
         player = FindObjectOfType<Player>();
-        for (int i = 0; i < player.spellsPrepared.Count; i++) {
+        for (int i = 0; i < Player.spellsPrepared.Count; i++) {
             spellBar.transform.GetChild(i).gameObject.SetActive(true);
-            Instantiate(player.spellsPrepared[i], spellBar.transform.GetChild(i));
+            Instantiate(Player.spellsPrepared[i], spellBar.transform.GetChild(i));
         }
         for (int i = 19; i >= player.GetComponent<Character>().maxMana; i--) {
             manaBar.transform.GetChild(i).gameObject.SetActive(false);
@@ -38,6 +40,14 @@ public class GameManager : MonoBehaviour {
     private void Update() {
         if (isCastingPhase) {
             spellToCast = spellsToCast[spellsToCastIndex];
+        }
+    }
+
+    public void HandleCharacterDead(Character character) {
+        if (character.gameObject.GetComponent<Player>() != null) {
+            levelManager.LoadLevel("02b_Lose");
+        } else {
+            levelManager.NextLevel();
         }
     }
 

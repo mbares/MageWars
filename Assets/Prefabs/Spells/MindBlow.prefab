@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114082396061949780}
   m_Layer: 5
   m_Name: MindBlow
-  m_TagString: Untagged
+  m_TagString: mindBlow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +44,10 @@ MonoBehaviour:
   damage: 1
   gestureId: mindBlow
   manaCost: 4
-  spellType: 0
+  spellType: 6
   name: Mind Blow
-  description: 
+  description: Blow the minds of your foes with your amazing hocus pocus skills and
+    they will surely be confused.
 --- !u!114 &114128317470290474
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,15 +20,18 @@ public class LightningStrike : MonoBehaviour, ISpell {
     private string name;
     public string Name { get { return name; } set { name = value; } }
     [SerializeField]
+    [TextArea]
     private string description;
     public string Description { get { return description; } set { description = value; } }
 
     private GameManager gameManager;
     private Character enemyTarget;
+    private Player player;
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
         enemyTarget = FindObjectOfType<Enemy>().GetComponent<Character>();
+        player = FindObjectOfType<Player>();
     }
 
     public void AddSpellToCast() {
@@ -49,6 +52,6 @@ public class LightningStrike : MonoBehaviour, ISpell {
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");
         }
-        enemyTarget.DecreaseHealthBySpellDamage(damage, spellType);
+        player.Attack(damage, spellType);
     }
 }

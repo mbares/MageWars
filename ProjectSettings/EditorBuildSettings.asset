@@ -9,5 +9,23 @@ EditorBuildSettings:
     path: Assets/_Scenes/00a_Start_Menu.unity
     guid: c1fe091d6cd553744a401e63aa36939b
   - enabled: 1
+    path: Assets/_Scenes/00b_Spell_Select.unity
+    guid: 9a784d48953f80a4ca828a7fde711972
+  - enabled: 1
+    path: Assets/_Scenes/01a_Dungeon01.unity
+    guid: c81e63b1c7c34e3478f77246987c8ba6
+  - enabled: 1
+    path: Assets/_Scenes/01b_Dungeon01.unity
+    guid: 59ab7c3340e20c241b2471b32e796764
+  - enabled: 1
+    path: Assets/_Scenes/01c_Dungeon01.unity
+    guid: c3e65c684998721419d7f68133a10283
+  - enabled: 1
+    path: Assets/_Scenes/02a_Win.unity
+    guid: 0ebdc6f50cd8bd4488d5d7d8fcd2adb2
+  - enabled: 1
+    path: Assets/_Scenes/02b_Lose.unity
+    guid: 5ae4eaf6e0bddd840b6b0157ccf9bb24
+  - enabled: 1
     path: Assets/_Scenes/00c_Options.unity
     guid: 3e28a9ff07ff3304985c99975736b7d1
