@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEmpower : MonoBehaviour, IEnemySpell {
+public class EnemyEmpower : IEnemySpell {
 
     public int empowerValue;
     public SpellType spellType = SpellType.None;

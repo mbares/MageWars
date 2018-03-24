@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLifeSteal : MonoBehaviour, IEnemySpell {
+public class EnemyLifeSteal : IEnemySpell {
 
     public int minLifeStealDamage;
     public int maxLifeStealDamage;

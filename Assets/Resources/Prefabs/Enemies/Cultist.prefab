@@ -9,94 +9,96 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1278261313240984}
+  m_RootGameObject: {fileID: 1365074938371784}
   m_IsPrefabParent: 1
---- !u!1 &1278261313240984
+--- !u!1 &1365074938371784
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4104759007685416}
-  - component: {fileID: 212547936876877246}
-  - component: {fileID: 114946151615044602}
-  - component: {fileID: 114944648527403426}
-  - component: {fileID: 114807486675987046}
+  - component: {fileID: 4614482156445892}
+  - component: {fileID: 212415266188988300}
+  - component: {fileID: 114484667369603240}
+  - component: {fileID: 114041191209045912}
+  - component: {fileID: 114766838591990756}
   m_Layer: 0
-  m_Name: FireMage
+  m_Name: Cultist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4104759007685416
+--- !u!4 &4614482156445892
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278261313240984}
+  m_GameObject: {fileID: 1365074938371784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.22, y: -2.92, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12.820001}
---- !u!114 &114807486675987046
+--- !u!114 &114041191209045912
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278261313240984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190cc876564338047bab053e0a6e832d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireBreathManaCost: 3
-  minFireBreathDamage: 2
-  maxFireBreathDamage: 3
-  burningDamage: 2
-  fireShieldManaCost: 2
-  fireShieldDamage: 1
-  fireShieldDuration: 3
-  smokeScreenManaCost: 2
-  smokeScreenDuration: 2
---- !u!114 &114944648527403426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278261313240984}
+  m_GameObject: {fileID: 1365074938371784}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c453f008c329261468310953dc48ab04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Fire Mage
-  maxHealth: 50
+  name: Necromancer
+  maxHealth: 80
   maxMana: 6
   resistances: 06000000
   weaknesses: 07000000
   statusEffectsBar: {fileID: 0}
---- !u!114 &114946151615044602
+--- !u!114 &114484667369603240
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278261313240984}
+  m_GameObject: {fileID: 1365074938371784}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb8d175d716da42459b0953b5e9e277a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &212547936876877246
+--- !u!114 &114766838591990756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365074938371784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b3be0d07685664d8818f2b11f64cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeStealManaCost: 4
+  minLifeStealDamage: 2
+  maxLifeStealDamage: 4
+  mindBlowManaCost: 4
+  maxMindBlowDamage: 1
+  minMindBlowDamage: 3
+  empowerManaCost: 2
+  empowerValue: 2
+  darkShieldManaCost: 2
+  darkShieldDamage: 1
+  darkShieldDuration: 2
+--- !u!212 &212415266188988300
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278261313240984}
+  m_GameObject: {fileID: 1365074938371784}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -125,7 +127,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2dcc30ae770a004a87d4130a44186cc, type: 3}
+  m_Sprite: {fileID: 21300002, guid: f2dcc30ae770a004a87d4130a44186cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -13,6 +13,9 @@ public class Cultist : MonoBehaviour {
     public int minMindBlowDamage = 3;
     public int empowerManaCost = 2;
     public int empowerValue = 2;
+    public int darkShieldManaCost = 2;
+    public int darkShieldDamage = 1;
+    public int darkShieldDuration = 3;
 
     private Character playerCharacter;
     private Enemy enemy;
@@ -25,7 +28,8 @@ public class Cultist : MonoBehaviour {
         spells = new List<IEnemySpell> {
             new EnemyLifeSteal(lifeStealManaCost, minLifeStealDamage, maxLifeStealDamage),
             new EnemyMindBlow(mindBlowManaCost, minMindBlowDamage, maxMindBlowDamage),
-            new EnemyEmpower(empowerManaCost, empowerValue)
+            new EnemyEmpower(empowerManaCost, empowerValue),
+            new EnemyElementalShield(darkShieldManaCost, darkShieldDuration, darkShieldDamage, SpellType.Dark)
         };
         spellPriority = new int[spells.Count];
         playerCharacter = FindObjectOfType<Player>().GetComponent<Character>();
@@ -38,14 +42,19 @@ public class Cultist : MonoBehaviour {
     private void Update() {
         if (gameManager.IsEnemyPhase() && !enemy.IsFinishedAttacking()) {
             enemy.SetIsFinishedAttacking(true);
-            Attack();
+            StartCoroutine(Attack());
         }
     }
 
-    private void Attack() {
+    private IEnumerator Attack() {
+        int darkShieldCastedCount = 0;
         while (enemyCharacter.GetMana() >= Mathf.Min(lifeStealManaCost, mindBlowManaCost, empowerManaCost)) {
+            yield return new WaitForSeconds(1);
             for (int i = 0; i < spells.Count; i++) {
                 spellPriority[i] = Random.Range(0, 100);
+            }
+            if (enemyCharacter.HasElementalShield()) {
+                spellPriority[3] -= 30 * darkShieldCastedCount;
             }
             if (enemyCharacter.GetExtraDamage() > 0) {
                 spellPriority[2] -= 100;
@@ -59,6 +68,9 @@ public class Cultist : MonoBehaviour {
             }
             spellToCast.DoSpellEffect(enemy, playerCharacter);
             enemyCharacter.DecreaseMana(spellToCast.ManaCost);
+            if (spellToCast is EnemyElementalShield) {
+                darkShieldCastedCount++;
+            }
         }
         enemy.EndTurn();
     }

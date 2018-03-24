@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     private bool isEnemyPhase = false;
 
     void Start() {
+        FloatingTextController.Initialize();
         drawArea.SetActive(false);
         levelManager = FindObjectOfType<LevelManager>();
         enemy = FindObjectOfType<Enemy>();
@@ -34,12 +35,6 @@ public class GameManager : MonoBehaviour {
         }
         for (int i = 19; i >= player.GetComponent<Character>().maxMana; i--) {
             manaBar.transform.GetChild(i).gameObject.SetActive(false);
-        }
-    }
-
-    private void Update() {
-        if (isCastingPhase) {
-            spellToCast = spellsToCast[spellsToCastIndex];
         }
     }
 
@@ -61,6 +56,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void StartPreparePhase() {
+        spellBar.SetActive(true);
         isPreparePhase = true;
         castButton.SetActive(true);
         spellsToCastBar.SetActive(true);
@@ -75,10 +71,11 @@ public class GameManager : MonoBehaviour {
 
     public void StartCastPhase() {
         if (spellsToCast.Count > 0) {
+            spellBar.SetActive(false);
             isCastingPhase = true;
             drawArea.SetActive(true);
             castButton.SetActive(false);
-            spellsToCastBar.SetActive(false);
+            spellToCast = spellsToCast[spellsToCastIndex];
             gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].GestureId);
         }
     }
@@ -103,11 +100,17 @@ public class GameManager : MonoBehaviour {
     }
 
     public void IncrementSpellsToCastIndex() {
+        if (spellsToCastBar.transform.GetChild(spellsToCastIndex).childCount > 0) {
+            spellsToCastBar.transform.GetChild(spellsToCastIndex).GetChild(0).gameObject.SetActive(true);
+        }
+        spellsToCastBar.transform.GetChild(spellsToCastIndex).gameObject.SetActive(false);
+        spellsToCastBar.transform.GetChild(spellsToCastIndex + 1).GetChild(0).gameObject.SetActive(false);
         spellsToCastIndex++;
         if (spellsToCastIndex >= spellsToCast.Count) {
             StartEnemyPhase();
             return;
         }
+        spellToCast = spellsToCast[spellsToCastIndex];
         gesturePreview.GetComponent<GesturePreview>().ShowGesturePreview(spellsToCast[spellsToCastIndex].GestureId);
     }
 

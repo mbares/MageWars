@@ -20,8 +20,13 @@ public class Grunt : MonoBehaviour {
         if (gameManager.IsEnemyPhase() && !enemy.IsFinishedAttacking()) {
             enemy.SetIsFinishedAttacking(true);
             Debug.Log("ATTACKING");
-            enemy.Attack(minDmg, maxDmg);
+            StartCoroutine(Attack());
             enemy.EndTurn();
         }
 	}
+
+    private IEnumerator Attack() {
+        yield return new WaitForSeconds(1);
+        enemy.Attack(minDmg, maxDmg);
+    }
 }

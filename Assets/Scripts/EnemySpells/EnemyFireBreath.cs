@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFireBreath : MonoBehaviour, IEnemySpell {
+public class EnemyFireBreath : IEnemySpell {
 
     public int minFireBreathDamage;
     public int maxFireBreathDamage;

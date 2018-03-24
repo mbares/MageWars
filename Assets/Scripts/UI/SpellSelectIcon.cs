@@ -25,8 +25,6 @@ public class SpellSelectIcon : MonoBehaviour {
             cloneButton.onClick.AddListener(delegate () { RemoveSpellFromLoadout(); });
             clone.transform.localPosition = new Vector3(0, 0, 0);
             spellSelectController.UpdateAddSpellButton(this);
-            Debug.Log(Player.spellsPrepared.Count);
-            Debug.Log(Player.spellsPrepared[0]);
         } 
     }
 

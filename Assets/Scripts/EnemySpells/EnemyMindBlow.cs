@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMindBlow : MonoBehaviour, IEnemySpell {
+public class EnemyMindBlow : IEnemySpell {
 
     public int minMindBlowDamage;
     public int maxMindBlowDamage;

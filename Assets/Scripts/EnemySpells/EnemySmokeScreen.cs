@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySmokeScreen : MonoBehaviour, IEnemySpell {
+public class EnemySmokeScreen : IEnemySpell {
 
     public int smokeScreenDuration;
     public int ManaCost { get; set; }

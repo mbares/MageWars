@@ -39,14 +39,15 @@ public class FireMage : MonoBehaviour {
     private void Update() {
         if (gameManager.IsEnemyPhase() && !enemy.IsFinishedAttacking()) {
             enemy.SetIsFinishedAttacking(true);
-            Attack();
+            StartCoroutine(Attack());
         }
     }
 
-    private void Attack() {
+    private IEnumerator Attack() {
         int fireShieldCastedCount = 0;
         int smokeScreenCastedCount = 0;
         while (enemyCharacter.GetMana() >= Mathf.Min(fireBreathManaCost, fireShieldManaCost, smokeScreenManaCost)) {
+            yield return new WaitForSeconds(1);
             for (int i = 0; i < spells.Count; i++) {
                 spellPriority[i] = Random.Range(0, 100);
             }
