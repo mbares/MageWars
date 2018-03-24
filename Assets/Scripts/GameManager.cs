@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
     private bool isEnemyPhase = false;
 
     void Start() {
-        FloatingTextController.Initialize();
         drawArea.SetActive(false);
         levelManager = FindObjectOfType<LevelManager>();
         enemy = FindObjectOfType<Enemy>();

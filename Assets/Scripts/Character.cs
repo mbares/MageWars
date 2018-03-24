@@ -11,6 +11,7 @@ public class Character : MonoBehaviour {
     public List<SpellType> weaknesses;
     public StatusEffectsBar statusEffectsBar;
 
+    private FloatingTextController floatingTextController;
     private int health;
     private int mana;
     private Dictionary<StatusEffect, string> statusEffects = new Dictionary<StatusEffect, string>();
@@ -32,6 +33,7 @@ public class Character : MonoBehaviour {
     private List<SpellType> temporaryResistances = new List<SpellType>();
 
     private void Awake() {
+        floatingTextController = FindObjectOfType<FloatingTextController>();
         if (gameObject.GetComponent<Player>() != null) {
             maxHealth = PlayerPrefsManager.GetPlayerMaxHealth();
             maxMana = PlayerPrefsManager.GetPlayerMaxMana();
@@ -62,12 +64,12 @@ public class Character : MonoBehaviour {
         } else {
             health += value;
         }
-        FloatingTextController.CreateFloatingText("+" + value, transform, Color.green);
+        floatingTextController.CreateFloatingText("+" + value, transform, Color.green);
     }
 
     public void DecreaseHealth(int value) {
         GetComponent<Animator>().SetTrigger("damaged");
-        FloatingTextController.CreateFloatingText("-" + value, transform, Color.red);
+        floatingTextController.CreateFloatingText("-" + value, transform, Color.red);
         health -= value;
     }
 
@@ -104,7 +106,7 @@ public class Character : MonoBehaviour {
     public void SetIsBlinded(int turns) {
         if (turns > 0 && turns > blindedTurns) {
             isBlinded = true;
-            FloatingTextController.CreateFloatingText("Blinded", transform, Color.yellow);
+            floatingTextController.CreateFloatingText("Blinded", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Blinded)) {
                 statusEffects.Add(StatusEffect.Blinded, turns.ToString());
             } else {
@@ -126,7 +128,7 @@ public class Character : MonoBehaviour {
     public void SetIsBurning(int turns, int damage) {
         if (turns > 0 && turns > burningTurns) {
             isBurning = true;
-            FloatingTextController.CreateFloatingText("Burning", transform, Color.yellow);
+            floatingTextController.CreateFloatingText("Burning", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Burning)) {
                 statusEffects.Add(StatusEffect.Burning, turns.ToString());
             } else {
@@ -149,7 +151,7 @@ public class Character : MonoBehaviour {
     public void SetIsWet(int turns) {
         if (turns > 0 && turns > wetTurns) {
             isWet = true;
-            FloatingTextController.CreateFloatingText("Wet", transform, Color.yellow);
+            floatingTextController.CreateFloatingText("Wet", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Wet)) {
                 statusEffects.Add(StatusEffect.Wet, turns.ToString());
             } else {
@@ -171,7 +173,7 @@ public class Character : MonoBehaviour {
     public void SetIsConfused(int turns) {
         if (turns > 0 && turns > confusedTurns) {
             isBurning = true;
-            FloatingTextController.CreateFloatingText("Confused", transform, Color.yellow);
+            floatingTextController.CreateFloatingText("Confused", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Confused)) {
                 statusEffects.Add(StatusEffect.Confused, turns.ToString());
             } else {
@@ -191,7 +193,7 @@ public class Character : MonoBehaviour {
     }
 
     public void SetIsStunned(bool isStunned) {
-        FloatingTextController.CreateFloatingText("Stunned", transform, Color.yellow);
+        floatingTextController.CreateFloatingText("Stunned", transform, Color.yellow);
         this.isStunned = isStunned;
     }
 
@@ -202,7 +204,7 @@ public class Character : MonoBehaviour {
     public void SetHasElementalShield(bool hasElementalShield, SpellType type, int turns, int damage) {
         if (turns > 0 && turns > elementalShieldTurns) {
             hasElementalShield = true;
-            FloatingTextController.CreateFloatingText("Shielded", transform, Color.yellow);
+            floatingTextController.CreateFloatingText("Shielded", transform, Color.yellow);
             if (!resistances.Contains(type)) {
                 temporaryResistances.Add(type);
             }
@@ -231,7 +233,7 @@ public class Character : MonoBehaviour {
         if (extraDamage > 0) {
             if (!statusEffects.ContainsKey(StatusEffect.ExtraDamage)) {
                 statusEffects.Add(StatusEffect.ExtraDamage, "");
-                FloatingTextController.CreateFloatingText("Empowered", transform, Color.yellow);
+                floatingTextController.CreateFloatingText("Empowered", transform, Color.yellow);
                 statusEffectsBar.UpdateBar(statusEffects);
             } 
         } else {
