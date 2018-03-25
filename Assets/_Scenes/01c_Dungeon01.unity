@@ -384,7 +384,7 @@ MonoBehaviour:
   manaBar: {fileID: 1144694600}
   drawArea: {fileID: 2016019922}
   castButton: {fileID: 392720140}
-  spellsToCastBar: {fileID: 0}
+  spellsToCastBar: {fileID: 399984236}
   gesturePreview: {fileID: 864765778}
 --- !u!4 &55837913
 Transform:
@@ -1302,6 +1302,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224412224625857290, guid: 5a17bec7b4a0e274a8081c495fa9ccb9,
     type: 2}
   m_PrefabInternal: {fileID: 399984234}
+--- !u!1 &399984236 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1562265288048936, guid: 5a17bec7b4a0e274a8081c495fa9ccb9,
+    type: 2}
+  m_PrefabInternal: {fileID: 399984234}
 --- !u!1 &486138529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,7 +1861,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4561740195114726, guid: 18ac95626edd9f74cb8219f47c011ee3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.65
+      value: -2.92
       objectReference: {fileID: 0}
     - target: {fileID: 4561740195114726, guid: 18ac95626edd9f74cb8219f47c011ee3, type: 2}
       propertyPath: m_LocalPosition.z

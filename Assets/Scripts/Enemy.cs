@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Attack(int minDmg, int maxDmg, SpellType spellType = SpellType.None, bool lifesteal = false) {
-        int damage = Random.Range(minDmg, maxDmg + 1) + character.GetExtraDamage();
+        int damage = Random.Range(minDmg, maxDmg + 1) + character.GetEmpoweredDamage();
         if (character.IsBlinded() && Random.Range(0, 4) == 0) {
             Debug.Log(character.name + " misses the attack because of blind effect.");
             return;
@@ -26,11 +26,11 @@ public class Enemy : MonoBehaviour {
             Debug.Log("In it's confusion " + character.name + "'s attack backfires.");
         } else {
             target.DecreaseHealthBySpellDamage(damage, spellType);
+            if (lifesteal) {
+                character.IncreaseHealth(damage / 2);
+            }
         }
-        if (lifesteal) {
-            character.IncreaseHealth(damage / 2);
-        }
-        character.SetExtraDamage(0);
+        character.SetEmpowered(0);
     }
 
     public bool IsFinishedAttacking() {

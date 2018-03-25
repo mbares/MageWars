@@ -6,7 +6,6 @@ using GestureRecognizer;
 public class Empower : MonoBehaviour, ISpell {
 
     public int empowerValue;
-    public int scoreModifier;
 
     [SerializeField]
     private string gestureId;
@@ -42,9 +41,9 @@ public class Empower : MonoBehaviour, ISpell {
         if (result.score.score > 0.95f) {
             extraDamage *= 2;
         } else if (result.score.score > 0.85f) {
-            extraDamage += scoreModifier;
+            extraDamage += 1;
         }
-        playerCharacter.GetComponent<Character>().SetExtraDamage(extraDamage);
+        playerCharacter.GetComponent<Character>().SetEmpowered(extraDamage);
         Debug.Log(playerCharacter.name + " empowers his next damaging spell.");
     }
 }

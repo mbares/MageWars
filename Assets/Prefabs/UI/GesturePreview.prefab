@@ -55,7 +55,7 @@ MonoBehaviour:
   - gestureId: mindBlow
     image: {fileID: 21300000, guid: 71da3dc549277ef4dbb6e739f4d9493c, type: 3}
   - gestureId: rejuvenatingLight
-    image: {fileID: 21300000, guid: 8c97512e76b0e1842b1a4d70ee95fa25, type: 3}
+    image: {fileID: 21300000, guid: 026c426f99fefe34a99704ffc70e05b5, type: 3}
   - gestureId: empower
     image: {fileID: 21300000, guid: 68d91dd0e145df44bb9704c4c1a6b27c, type: 3}
 --- !u!114 &114574320056801634

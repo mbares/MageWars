@@ -48,6 +48,7 @@ public class RejuvenatingLight : MonoBehaviour, ISpell {
         }
         if (character.IsConfused() && Random.Range(0, 5) == 0) {
             enemyTarget.IncreaseHealth(heal);
+            Debug.Log("In it's confustion " + character.name + "heals the enemy.");
         } else {
             character.IncreaseHealth(heal);
         }

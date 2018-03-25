@@ -16,20 +16,20 @@ public class Character : MonoBehaviour {
     private int mana;
     private Dictionary<StatusEffect, string> statusEffects = new Dictionary<StatusEffect, string>();
     private bool isBlinded;
-    private int blindedTurns;
+    private int blindedTurns = 0;
     private bool isBurning;
-    private int burningTurns;
+    private int burningTurns = 0;
     private int burningDamage = 0;
     private bool isWet;
-    private int wetTurns;
+    private int wetTurns = 0;
     private bool isStunned;
     private bool isConfused;
-    private int confusedTurns;
+    private int confusedTurns = 0;
     private bool hasElementalShield;
     private SpellType elementalShieldType;
-    private int elementalShieldTurns;
+    private int elementalShieldTurns = 0;
     private int elementalShieldDamage = 0;
-    private int extraDamage = 0;
+    private int empoweredDamage = 0;
     private List<SpellType> temporaryResistances = new List<SpellType>();
 
     private void Awake() {
@@ -85,6 +85,7 @@ public class Character : MonoBehaviour {
             if (GetComponent<Player>() != null) {
                 FindObjectOfType<Enemy>().GetComponent<Character>().DecreaseHealthBySpellDamage(elementalShieldDamage, elementalShieldType);
             } else if (GetComponent<Enemy>() != null) {
+                Debug.Log("PLAYER GETS BURNED BY SHIELD FOR " + elementalShieldDamage);
                 FindObjectOfType<Player>().GetComponent<Character>().DecreaseHealthBySpellDamage(elementalShieldDamage, elementalShieldType);
             }
         }
@@ -106,6 +107,7 @@ public class Character : MonoBehaviour {
     public void SetIsBlinded(int turns) {
         if (turns > 0 && turns > blindedTurns) {
             isBlinded = true;
+            blindedTurns = turns;
             floatingTextController.CreateFloatingText("Blinded", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Blinded)) {
                 statusEffects.Add(StatusEffect.Blinded, turns.ToString());
@@ -115,10 +117,10 @@ public class Character : MonoBehaviour {
             statusEffectsBar.UpdateBar(statusEffects);
         } else if (turns == 0) {
             isBlinded = false;
+            blindedTurns = turns;
             statusEffects.Remove(StatusEffect.Blinded);
             statusEffectsBar.UpdateBar(statusEffects);
         }
-        blindedTurns = turns;
     }
 
     public bool IsBurning() {
@@ -128,6 +130,8 @@ public class Character : MonoBehaviour {
     public void SetIsBurning(int turns, int damage) {
         if (turns > 0 && turns > burningTurns) {
             isBurning = true;
+            burningTurns = turns;
+            burningDamage = damage;
             floatingTextController.CreateFloatingText("Burning", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Burning)) {
                 statusEffects.Add(StatusEffect.Burning, turns.ToString());
@@ -137,11 +141,11 @@ public class Character : MonoBehaviour {
             statusEffectsBar.UpdateBar(statusEffects);
         } else if (turns == 0) {
             isBurning = false;
+            burningTurns = turns;
+            burningDamage = damage;
             statusEffects.Remove(StatusEffect.Burning);
             statusEffectsBar.UpdateBar(statusEffects);
         }
-        burningTurns = turns;
-        burningDamage = damage;
     }
 
     public bool IsWet() {
@@ -151,6 +155,7 @@ public class Character : MonoBehaviour {
     public void SetIsWet(int turns) {
         if (turns > 0 && turns > wetTurns) {
             isWet = true;
+            wetTurns = turns;
             floatingTextController.CreateFloatingText("Wet", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Wet)) {
                 statusEffects.Add(StatusEffect.Wet, turns.ToString());
@@ -160,10 +165,10 @@ public class Character : MonoBehaviour {
             statusEffectsBar.UpdateBar(statusEffects);
         } else if (turns == 0) {
             isWet = false;
+            wetTurns = turns;
             statusEffects.Remove(StatusEffect.Wet);
             statusEffectsBar.UpdateBar(statusEffects);
         }
-        wetTurns = turns;
     }
 
     public bool IsConfused() {
@@ -172,7 +177,8 @@ public class Character : MonoBehaviour {
 
     public void SetIsConfused(int turns) {
         if (turns > 0 && turns > confusedTurns) {
-            isBurning = true;
+            isConfused = true;
+            confusedTurns = turns;
             floatingTextController.CreateFloatingText("Confused", transform, Color.yellow);
             if (!statusEffects.ContainsKey(StatusEffect.Confused)) {
                 statusEffects.Add(StatusEffect.Confused, turns.ToString());
@@ -181,11 +187,11 @@ public class Character : MonoBehaviour {
             }
             statusEffectsBar.UpdateBar(statusEffects);
         } else if (turns == 0) {
-            isBurning = false;
+            confusedTurns = turns;
+            isConfused = false;
             statusEffects.Remove(StatusEffect.Confused);
             statusEffectsBar.UpdateBar(statusEffects);
         }
-        confusedTurns = turns;
     }
 
     public bool IsStunned() {
@@ -201,13 +207,15 @@ public class Character : MonoBehaviour {
         return hasElementalShield;
     }
 
-    public void SetHasElementalShield(bool hasElementalShield, SpellType type, int turns, int damage) {
+    public void SetHasElementalShield(SpellType type, int turns, int damage) {
+        Debug.Log("Setting shield, turns: " + turns);
         if (turns > 0 && turns > elementalShieldTurns) {
             hasElementalShield = true;
             floatingTextController.CreateFloatingText("Shielded", transform, Color.yellow);
             if (!resistances.Contains(type)) {
                 temporaryResistances.Add(type);
             }
+            elementalShieldTurns = turns;
             elementalShieldType = type;
             elementalShieldDamage = damage;
             if (!statusEffects.ContainsKey(StatusEffect.ElementalShield)) {
@@ -217,6 +225,7 @@ public class Character : MonoBehaviour {
             }
             statusEffectsBar.UpdateBar(statusEffects);
         } else if (turns == 0) {
+            elementalShieldTurns = turns;
             temporaryResistances.Remove(type);
             hasElementalShield = false;
             statusEffects.Remove(StatusEffect.ElementalShield);
@@ -224,42 +233,40 @@ public class Character : MonoBehaviour {
         }
     }
 
-    public int GetExtraDamage() {
-        return extraDamage;
+    public int GetEmpoweredDamage() {
+        return empoweredDamage;
     }
 
-    public void SetExtraDamage(int extraDamage) {
-        this.extraDamage = extraDamage;
-        if (extraDamage > 0) {
-            if (!statusEffects.ContainsKey(StatusEffect.ExtraDamage)) {
-                statusEffects.Add(StatusEffect.ExtraDamage, "");
+    public void SetEmpowered(int empoweredDamage) {
+        this.empoweredDamage = empoweredDamage;
+        if (empoweredDamage > 0) {
+            if (!statusEffects.ContainsKey(StatusEffect.Empowered)) {
+                statusEffects.Add(StatusEffect.Empowered, "");
                 floatingTextController.CreateFloatingText("Empowered", transform, Color.yellow);
                 statusEffectsBar.UpdateBar(statusEffects);
             } 
         } else {
-            statusEffects.Remove(StatusEffect.ExtraDamage);
+            statusEffects.Remove(StatusEffect.Empowered);
             statusEffectsBar.UpdateBar(statusEffects);
         }
     }
 
-    public bool CalculateNewTurnStats() {
-        if (elementalShieldTurns > 0) {
-            elementalShieldTurns--;
+    public void CalculateEndTurnStats() {
+        if (confusedTurns > 0) {
+            confusedTurns--;
         }
         if (blindedTurns > 0) {
             blindedTurns--;
         }
-        if (burningTurns > 0) {
-            DecreaseHealth(burningDamage);
-            Debug.Log(name + " suffers burning damage.");
-            burningTurns--;
-        }
         if (wetTurns > 0) {
             wetTurns--;
         }
-        if (elementalShieldTurns == 0) {
-            hasElementalShield = false;
-            statusEffects.Remove(StatusEffect.ElementalShield);
+
+        if (confusedTurns == 0) {
+            isConfused = false;
+            statusEffects.Remove(StatusEffect.Confused);
+        } else if (confusedTurns > 0) {
+            statusEffects[StatusEffect.Confused] = confusedTurns.ToString();
         }
         if (blindedTurns == 0) {
             isBlinded = false;
@@ -267,18 +274,38 @@ public class Character : MonoBehaviour {
         } else if (blindedTurns > 0) {
             statusEffects[StatusEffect.Blinded] = blindedTurns.ToString();
         }
+        if (wetTurns == 0) {
+            isWet = false;
+            statusEffects.Remove(StatusEffect.Wet);
+        } else if (wetTurns > 0) {
+            statusEffects[StatusEffect.Wet] = wetTurns.ToString();
+        }
+        statusEffectsBar.UpdateBar(statusEffects);
+    }
+
+    public bool CalculateNewTurnStats() {
+        if (elementalShieldTurns > 0) {
+            elementalShieldTurns--;
+        }
+        if (burningTurns > 0) {
+            DecreaseHealth(burningDamage);
+            Debug.Log(name + " suffers burning damage.");
+            burningTurns--;
+        }
+        
+        if (elementalShieldTurns == 0) {
+            hasElementalShield = false;
+            temporaryResistances.Remove(elementalShieldType);
+            statusEffects.Remove(StatusEffect.ElementalShield);
+        } else if (elementalShieldTurns > 0) {
+            statusEffects[StatusEffect.ElementalShield] = elementalShieldTurns.ToString();
+        }
         if (burningTurns == 0) {
             isBurning = false;
             burningDamage = 0;
             statusEffects.Remove(StatusEffect.Burning);
         } else if (burningTurns > 0) {
             statusEffects[StatusEffect.Burning] = burningTurns.ToString();
-        }
-        if (wetTurns == 0) {
-            isWet = false;
-            statusEffects.Remove(StatusEffect.Wet);
-        } else if (wetTurns > 0) {
-            statusEffects[StatusEffect.Wet] = wetTurns.ToString();
         }
         statusEffectsBar.UpdateBar(statusEffects);
         if (isStunned) {

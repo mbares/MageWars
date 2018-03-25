@@ -14,7 +14,7 @@ public class EnemyEmpower : IEnemySpell {
     }
 
     public void DoSpellEffect(Enemy enemy, Character target) {
-        enemy.GetComponent<Character>().SetExtraDamage(empowerValue);
+        enemy.GetComponent<Character>().SetEmpowered(empowerValue);
         Debug.Log(enemy.GetComponent<Character>().name + " empowers his next spell.");
     }
 }

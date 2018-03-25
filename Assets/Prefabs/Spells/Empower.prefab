@@ -69,13 +69,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   empowerValue: 2
-  scoreModifier: 1
   gestureId: empower
   manaCost: 2
   spellType: 1
   name: Empower
   description: Empower your next spell so it can be more amazing that it is now, and
-    it's pretty amazing even now.
+    they are all pretty amazing even now.
 --- !u!114 &114913981716387878
 MonoBehaviour:
   m_ObjectHideFlags: 1

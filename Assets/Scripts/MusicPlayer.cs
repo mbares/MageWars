@@ -12,7 +12,6 @@ public class MusicPlayer : MonoBehaviour {
 
     void Awake() {
         audioSource = GetComponent<AudioSource>();
-        audioSource.volume = PlayerPrefsManager.GetMasterVolume() ;
         if (instance == null) {
             instance = this;
         } else if (instance != this) {

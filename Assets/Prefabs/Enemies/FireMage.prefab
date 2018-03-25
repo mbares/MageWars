@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBreathManaCost: 3
   minFireBreathDamage: 2
-  maxFireBreathDamage: 3
+  maxFireBreathDamage: 4
   burningDamage: 2
   fireShieldManaCost: 2
   fireShieldDamage: 1
@@ -93,10 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Fire Mage
-  maxHealth: 50
+  maxHealth: 30
   maxMana: 6
-  resistances: 06000000
-  weaknesses: 07000000
+  resistances: 02000000
+  weaknesses: 03000000
   statusEffectsBar: {fileID: 0}
 --- !u!114 &114946151615044602
 MonoBehaviour:

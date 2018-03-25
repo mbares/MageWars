@@ -37,7 +37,7 @@ public class GestureHandler : MonoBehaviour
             gestureScoreText.text = "Good!";
         } else {
             gestureScoreText.color = Color.red;
-            gestureScoreText.text = "Misspell!";
+            gestureScoreText.text = "Fail!!";
         }
         Invoke("ClearGestureScore", 0.5f);
     }

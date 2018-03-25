@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ef3a0015fa1dc4986f5da0b4042033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   gestureId: void
   manaCost: 3
   spellType: 6

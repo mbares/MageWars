@@ -18,7 +18,7 @@ public class Player : MonoBehaviour {
     }
 
     public void Attack(int damage, SpellType spellType = SpellType.None, bool lifesteal = false) {
-        damage += playerCharacter.GetExtraDamage();
+        damage += playerCharacter.GetEmpoweredDamage();
         if (playerCharacter.IsBlinded() && Random.Range(0, 4) == 0) {
             Debug.Log(playerCharacter.name + " misses the attack because of blind effect.");
             return;
@@ -32,6 +32,6 @@ public class Player : MonoBehaviour {
         if (lifesteal) {
             playerCharacter.IncreaseHealth(damage / 2);
         }
-        playerCharacter.SetExtraDamage(0);
+        playerCharacter.SetEmpowered(0);
     }
 }

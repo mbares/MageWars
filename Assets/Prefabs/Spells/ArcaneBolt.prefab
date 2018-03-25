@@ -93,10 +93,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6321aa02527d141a8ba8b1490225b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 3
   damageScoreModifier: 1
   gestureId: arcaneBolt
-  manaCost: 2
+  manaCost: 3
   spellType: 1
   name: Arcane Bolt
   description: Hurl a bolt of damaging arcane energy, no side effects for any party.

@@ -3,15 +3,11 @@ using System.Collections;
 
 public class PlayerPrefsManager : MonoBehaviour { 
 
-	const string MASTER_VOLUME_KEY = "master_volume";
     const string PLAYER_LEVEL_KEY = "player_level";
     const string PLAYER_MAX_HEALTH_KEY = "player_max_health";
     const string PLAYER_MAX_MANA_KEY = "player_max_mana";
 
     public static void SetInitialValues() {
-        if (!PlayerPrefs.HasKey(MASTER_VOLUME_KEY)) {
-            SetMasterVolume(0.8f);
-        }
         if (!PlayerPrefs.HasKey(PLAYER_LEVEL_KEY)) {
             SetPlayerLevel(1);
         }
@@ -22,17 +18,6 @@ public class PlayerPrefsManager : MonoBehaviour {
             SetPlayerMaxMana(8);
         }
     }
-
-    public static void SetMasterVolume(float volume) {
-		if(volume >= 0f && volume <= 1f)
-			PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, volume);
-		else 
-			Debug.LogError("Master volume out of range");
-	}
-
-	public static float GetMasterVolume() {
-		return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
-	}
 
     public static void SetPlayerLevel(int level) {
         if (level > 0)

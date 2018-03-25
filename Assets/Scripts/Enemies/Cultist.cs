@@ -5,17 +5,17 @@ using System.Linq;
 
 public class Cultist : MonoBehaviour {
 
-    public int lifeStealManaCost = 3;
+    public int lifeStealManaCost = 4;
     public int minLifeStealDamage = 2;
     public int maxLifeStealDamage = 4;
-    public int mindBlowManaCost = 2;
-    public int maxMindBlowDamage = 1;
-    public int minMindBlowDamage = 3;
+    public int mindBlowManaCost = 3;
+    public int minMindBlowDamage = 2;
+    public int maxMindBlowDamage = 3;
     public int empowerManaCost = 2;
     public int empowerValue = 2;
     public int darkShieldManaCost = 2;
     public int darkShieldDamage = 1;
-    public int darkShieldDuration = 3;
+    public int darkShieldDuration = 2;
 
     private Character playerCharacter;
     private Enemy enemy;
@@ -54,9 +54,9 @@ public class Cultist : MonoBehaviour {
                 spellPriority[i] = Random.Range(0, 100);
             }
             if (enemyCharacter.HasElementalShield()) {
-                spellPriority[3] -= 30 * darkShieldCastedCount;
+                spellPriority[1] -= (50 + (-50 * darkShieldCastedCount));
             }
-            if (enemyCharacter.GetExtraDamage() > 0) {
+            if (enemyCharacter.GetEmpoweredDamage() > 0) {
                 spellPriority[2] -= 100;
             }
             int spellToCastIndex = System.Array.IndexOf(spellPriority, spellPriority.Max());

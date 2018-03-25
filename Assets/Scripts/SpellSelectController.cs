@@ -27,6 +27,7 @@ public class SpellSelectController : MonoBehaviour {
         spellManaCost.text = null;
         spellDescription.text = null;
         spellSign.gameObject.SetActive(false);
+        startButton.gameObject.GetComponent<Text>().color = Color.grey;
     }
 	
     public void SpellInfo(SpellSelectIcon spellSelectIcon) {

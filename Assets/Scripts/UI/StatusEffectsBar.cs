@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum StatusEffect {
-    Blinded, Burning, Wet, Confused, ElementalShield, ExtraDamage
+    Blinded, Burning, Wet, Confused, ElementalShield, Empowered
 }
 
 public class StatusEffectsBar : MonoBehaviour {

@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spell: {fileID: 1751683509809726, guid: 4509eb5bb32754d4aba0853a1cbf8f29, type: 2}
   spellBar: {fileID: 1358021300}
-  spellSign: {fileID: 21300000, guid: 8c97512e76b0e1842b1a4d70ee95fa25, type: 3}
+  spellSign: {fileID: 21300000, guid: 026c426f99fefe34a99704ffc70e05b5, type: 3}
 --- !u!114 &746340856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2303,9 +2303,9 @@ GameObject:
   - component: {fileID: 866894849}
   - component: {fileID: 866894852}
   - component: {fileID: 866894851}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EmpowerIcon
-  m_TagString: Untagged
+  m_TagString: empower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2413,7 +2413,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 866894849}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!224 &881948940

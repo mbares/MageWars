@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39b5e3546eaba841b2452e10db979d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   gestureId: mindBlow
   manaCost: 4
   spellType: 6

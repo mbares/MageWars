@@ -39,15 +39,19 @@ public class LightningStrike : MonoBehaviour, ISpell {
     }
 
     public void DoSpellEffect(RecognitionResult result) {
-        if (result.score.score == 1 && enemyTarget.IsWet()) {
+        int damageValue = damage;
+        if (result.score.score > 0.95f && enemyTarget.IsWet()) {
+            damageValue += 3;
             enemyTarget.SetIsStunned(true);
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");
-        } else if (result.score.score > 0.9f && enemyTarget.IsWet() && Random.Range(0, 5) == 1) {
+        } else if (result.score.score > 0.85f && enemyTarget.IsWet() && Random.Range(0, 5) == 1) {
+            damageValue += 2;
             enemyTarget.SetIsStunned(true);
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");
         } else if (enemyTarget.IsWet() && Random.Range(0, 10) == 1) {
+            damageValue += 1;
             enemyTarget.SetIsStunned(true);
             enemyTarget.SetIsWet(0);
             Debug.Log(enemyTarget.name + " is stunned by Lightning Strike");

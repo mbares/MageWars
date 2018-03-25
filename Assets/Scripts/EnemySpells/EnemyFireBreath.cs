@@ -19,7 +19,8 @@ public class EnemyFireBreath : IEnemySpell {
 
     public void DoSpellEffect(Enemy enemy, Character target) {
         enemy.Attack(minFireBreathDamage, maxFireBreathDamage, spellType);
-        target.SetIsBurning(Random.Range(1, 4), burningDamage);
-        Debug.Log(enemy.GetComponent<Character>().name + " hits " + target.name + " with Fire Breath");
+        int burningTurns = Random.Range(1, 4);
+        target.SetIsBurning(burningTurns, burningDamage);
+        Debug.Log(enemy.GetComponent<Character>().name + " hits " + target.name + " with Fire Breath and burns him for: " + burningTurns + " turns");
     }
 }

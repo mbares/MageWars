@@ -55,12 +55,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void StartPreparePhase() {
+        enemy.GetComponent<Character>().CalculateEndTurnStats();
         spellBar.SetActive(true);
         isPreparePhase = true;
         castButton.SetActive(true);
         spellsToCastBar.SetActive(true);
         player.GetComponent<Character>().SetMana(player.GetComponent<Character>().maxMana);
-        RefillMana();
+        RefillManaBar();
         ClearSpellsToCastBar();
         if (!player.GetComponent<Character>().CalculateNewTurnStats()) {
             Debug.Log(player.GetComponent<Character>().name + " is stunned and is skipping turn");
@@ -80,18 +81,20 @@ public class GameManager : MonoBehaviour {
     }
 
     private void StartEnemyPhase() {
-        enemy.SetIsFinishedAttacking(false);
-        spellsToCastBarIndex = 0;
-        ClearSpellsToCastBar();
-        isEnemyPhase = true;
+        player.GetComponent<Character>().CalculateEndTurnStats();
         isCastingPhase = false;
         drawArea.SetActive(false);
         spellsToCast.Clear();
         spellsToCastIndex = 0;
+        spellsToCastBarIndex = 0;
+        ClearSpellsToCastBar();
         if (!enemy.GetComponent<Character>().CalculateNewTurnStats()) {
             Debug.Log(enemy.GetComponent<Character>().name + " is stunned and is skipping turn");
             StartPreparePhase();
+            return;
         }
+        enemy.SetIsFinishedAttacking(false);
+        isEnemyPhase = true;
     }
 
     public ISpell GetSpellToCast() {
@@ -147,10 +150,10 @@ public class GameManager : MonoBehaviour {
         }
         spellsToCastBarIndex--;
         player.GetComponent<Character>().IncreaseMana(spell.ManaCost);
-        RefillMana();
+        RefillManaBar();
     }
 
-    private void RefillMana()
+    private void RefillManaBar()
     {
         for (int i = 0; i < player.GetComponent<Character>().GetMana(); i++) {
             Color tmp = manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color;

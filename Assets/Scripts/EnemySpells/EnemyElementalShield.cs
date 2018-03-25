@@ -17,7 +17,7 @@ public class EnemyElementalShield : IEnemySpell {
     }
 
     public void DoSpellEffect(Enemy enemy, Character target) {
-        enemy.GetComponent<Character>().SetHasElementalShield(true, spellType, elementalShieldDuration, elementalShieldDamage);
+        enemy.GetComponent<Character>().SetHasElementalShield(spellType, elementalShieldDuration, elementalShieldDamage);
         Debug.Log(enemy.GetComponent<Character>().name + " surrounds himself with Elemental Shield");
     }
 }

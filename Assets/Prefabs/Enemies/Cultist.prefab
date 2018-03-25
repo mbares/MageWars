@@ -54,9 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c453f008c329261468310953dc48ab04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Necromancer
-  maxHealth: 80
-  maxMana: 6
+  name: Cultist
+  maxHealth: 40
+  maxMana: 7
   resistances: 06000000
   weaknesses: 07000000
   statusEffectsBar: {fileID: 0}
@@ -85,9 +85,9 @@ MonoBehaviour:
   lifeStealManaCost: 4
   minLifeStealDamage: 2
   maxLifeStealDamage: 4
-  mindBlowManaCost: 4
-  maxMindBlowDamage: 1
-  minMindBlowDamage: 3
+  mindBlowManaCost: 3
+  minMindBlowDamage: 2
+  maxMindBlowDamage: 3
   empowerManaCost: 2
   empowerValue: 2
   darkShieldManaCost: 2

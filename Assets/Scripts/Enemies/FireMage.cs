@@ -52,10 +52,10 @@ public class FireMage : MonoBehaviour {
                 spellPriority[i] = Random.Range(0, 100);
             }
             if (enemyCharacter.HasElementalShield()) {
-                spellPriority[1] -= 30 * fireShieldCastedCount;
+                spellPriority[1] -= (50 + (-50 * fireShieldCastedCount));
             }
             if (playerCharacter.IsBlinded()) {
-                spellPriority[2] -= 30 * smokeScreenCastedCount;
+                spellPriority[2] -= (50 + (-50 * smokeScreenCastedCount));
             }
             int spellToCastIndex = System.Array.IndexOf(spellPriority, spellPriority.Max());
             IEnemySpell spellToCast = spells[spellToCastIndex];

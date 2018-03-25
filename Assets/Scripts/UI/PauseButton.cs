@@ -20,7 +20,6 @@ public class PauseButton : MonoBehaviour {
         pausePanel.SetActive(true);
         AudioListener.pause = true;
         AudioListener.volume = 0.0f;
-        Debug.Log("paused..");
     }
 
     public void ResumeGame() {
@@ -29,8 +28,14 @@ public class PauseButton : MonoBehaviour {
         Time.timeScale = 1f;
         AudioListener.pause = false;
         AudioListener.volume = 1.0f; 
-        Debug.Log("resumed..");
     }
 
-    
+    public void ReturnToMenu() {
+        paused = false;
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        AudioListener.volume = 1.0f;
+        FindObjectOfType<LevelManager>().LoadLevel("00a_Start_Menu");
+    }
 }
